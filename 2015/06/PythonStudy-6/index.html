@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Python学习（6）：字符串格式化&amp;格式化符号 | DarKnight</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="1. 字符串格式化
+先看一个例子：1234&apos;&amp;#123;0&amp;#125; love &amp;#123;1&amp;#125;,&amp;#123;2&amp;#125;&apos;.format(&apos;I&apos;, &apos;you&apos;, &apos;Shen&apos;)#返回：I love you,Shen&apos;&amp;#123;1&amp;#125; love &amp;#123;0&amp;#125;,&amp;#123;2&amp;#125;&apos;.format(&apos;I&apos;, &apos;you&apos;, &apos;Shen&apos;)#返回：you lo">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python学习（6）：字符串格式化&格式化符号">
+<meta property="og:url" content="http://darknight.me/2015/06/PythonStudy-6/index.html">
+<meta property="og:site_name" content="DarKnight">
+<meta property="og:description" content="1. 字符串格式化
+先看一个例子：1234&apos;&amp;#123;0&amp;#125; love &amp;#123;1&amp;#125;,&amp;#123;2&amp;#125;&apos;.format(&apos;I&apos;, &apos;you&apos;, &apos;Shen&apos;)#返回：I love you,Shen&apos;&amp;#123;1&amp;#125; love &amp;#123;0&amp;#125;,&amp;#123;2&amp;#125;&apos;.format(&apos;I&apos;, &apos;you&apos;, &apos;Shen&apos;)#返回：you lo">
+<meta property="og:updated_time" content="2016-02-21T04:56:02.569Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Python学习（6）：字符串格式化&格式化符号">
+<meta name="twitter:description" content="1. 字符串格式化
+先看一个例子：1234&apos;&amp;#123;0&amp;#125; love &amp;#123;1&amp;#125;,&amp;#123;2&amp;#125;&apos;.format(&apos;I&apos;, &apos;you&apos;, &apos;Shen&apos;)#返回：I love you,Shen&apos;&amp;#123;1&amp;#125; love &amp;#123;0&amp;#125;,&amp;#123;2&amp;#125;&apos;.format(&apos;I&apos;, &apos;you&apos;, &apos;Shen&apos;)#返回：you lo">
+  
+    <link rel="alternative" href="/atom.xml" title="DarKnight" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+      <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css" type="text/css">
+  
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  
+  
+      <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  
+  <script>
+      var yiliaConfig = {
+          fancybox: true,
+          animate: true,
+          isHome: false,
+          isPost: true,
+          isArchive: false,
+          isTag: false,
+          isCategory: false,
+          open_in_new: false
+      }
+  </script>
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            
+            <img lazy-src="/img/photo.png" class="js-avatar">
+            
+        </a>
+
+        <hgroup>
+          <h1 class="header-author"><a href="/">Lancelot</a></h1>
+        </hgroup>
+
+        
+        <p class="header-subtitle">拖延癌治疗阶段</p>
+        
+                
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <li id="Email"><a class="Email" target="_blank" href="mailto:darknight4lancelot@gmail.com" title="Email"></a></li>
+                            
+                                <li id="新浪微博"><a class="新浪微博" target="_blank" href="http://weibo.com/u/2556148711" title="新浪微博"></a></li>
+                            
+                                <li id="GitHub"><a class="GitHub" target="_blank" href="https://github.com/wanghaoxyq" title="GitHub"></a></li>
+                            
+                                <li id="网易云音乐"><a class="网易云音乐" target="_blank" href="http://music.163.com/#/user/home?id=42137986" title="网易云音乐"></a></li>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/JavaScript/" style="font-size: 14px;">JavaScript</a> <a href="/tags/Python/" style="font-size: 16px;">Python</a> <a href="/tags/Python学习笔记/" style="font-size: 18px;">Python学习笔记</a> <a href="/tags/Spring/" style="font-size: 10px;">Spring</a> <a href="/tags/fishc-com/" style="font-size: 20px;">fishc.com</a> <a href="/tags/代码编写技巧/" style="font-size: 10px;">代码编写技巧</a> <a href="/tags/正则表达式/" style="font-size: 12px;">正则表达式</a>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="https://hexo.io">Hexo</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="https://pages.github.com/">GitHub</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://moxfive.xyz/">MOxFIVE</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">生命在于折腾</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">Lancelot</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                
+                    <img lazy-src="/img/photo.png" class="js-avatar">
+                
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">Lancelot</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">拖延癌治疗阶段</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <li id="Email"><a class="Email" target="_blank" href="mailto:darknight4lancelot@gmail.com" title="Email"></a></li>
+                            
+                                <li id="新浪微博"><a class="新浪微博" target="_blank" href="http://weibo.com/u/2556148711" title="新浪微博"></a></li>
+                            
+                                <li id="GitHub"><a class="GitHub" target="_blank" href="https://github.com/wanghaoxyq" title="GitHub"></a></li>
+                            
+                                <li id="网易云音乐"><a class="网易云音乐" target="_blank" href="http://music.163.com/#/user/home?id=42137986" title="网易云音乐"></a></li>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+</nav>
+      <div class="body-wrap"><article id="post-PythonStudy-6" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/06/PythonStudy-6/" class="article-date">
+      <time datetime="2015-06-10T16:00:00.000Z" itemprop="datePublished">2015-06-11</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Python学习（6）：字符串格式化&amp;格式化符号
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python学习笔记/">Python学习笔记</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/fishc-com/">fishc.com</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h3 id="1-字符串格式化"><a href="#1-字符串格式化" class="headerlink" title="1. 字符串格式化"></a>1. 字符串格式化</h3><ul>
+<li>先看一个例子：<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'&#123;0&#125; love &#123;1&#125;,&#123;2&#125;'</span>.format(<span class="string">'I'</span>, <span class="string">'you'</span>, <span class="string">'Shen'</span>)</span><br><span class="line"><span class="comment">#返回：I love you,Shen</span></span><br><span class="line"><span class="string">'&#123;1&#125; love &#123;0&#125;,&#123;2&#125;'</span>.format(<span class="string">'I'</span>, <span class="string">'you'</span>, <span class="string">'Shen'</span>)</span><br><span class="line"><span class="comment">#返回：you love I,Shen</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>这里我们在字符串中使用{}和数字结合，给字符串中加入了置位符，并使用format方法对其中的置位符进行替换，得到我们想要的结果。置位符中的数字表示了替换时所使用的参数位置。</p>
+<blockquote>
+<p>这是format的位置参数用法</p>
+</blockquote>
+<ul>
+<li>format还有一种关键字参数的用法：<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'&#123;a&#125; love &#123;b&#125;,&#123;c&#125;'</span>.format(a=<span class="string">'I'</span>, b=<span class="string">'you'</span>, c=<span class="string">'Shen'</span>)</span><br><span class="line"><span class="comment">#返回：I love you,Shen</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<a id="more"></a>
+<p>这里我们不使用位置参数的方法，而是使用关键字定义置位符，并在format的参数列表中加入关键字的键值对进行替换</p>
+<ul>
+<li>位置参数和关键字参数可以一起使用：<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'&#123;0&#125; love &#123;b&#125;,&#123;c&#125;'</span>.format(<span class="string">'I'</span>, b=<span class="string">'you'</span>, c=<span class="string">'Shen'</span>)</span><br><span class="line"><span class="comment">#返回：I love you,Shen</span></span><br><span class="line"><span class="string">'&#123;a&#125; love &#123;1&#125;,&#123;c&#125;'</span>.format(a=<span class="string">'I'</span>, <span class="string">'you'</span>, c=<span class="string">'Shen'</span>)</span><br><span class="line"><span class="comment">#报错：SyntaxError: non-keyword arg after keyword arg</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<blockquote>
+<p>需要注意的是，同时使用位置参数和关键字参数时，位置参数置位符必须在关键字参数置位符之前，否则会报语法错误</p>
+</blockquote>
+<ul>
+<li>再看这一个例子：<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'&#123;&#123;0&#125;&#125;'</span>.format(<span class="string">'I love you'</span>)</span><br><span class="line"><span class="comment">#返回：'&#123;0&#125;'</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>这里返回的结果中并没有置位替换，因为两个花括号将0解释了。这里和转义字符有些类似</p>
+<ul>
+<li>下一个例子：<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'&#123;0:.1f&#125;&#123;1&#125;'</span>.format(<span class="number">27.658</span>, <span class="string">'GB'</span>)</span><br><span class="line"><span class="comment">#返回：27.7GB</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>这里的’:’表示格式化符号的开始，’.1f’的’.1’表示四舍五入保留一位小数点，’f’表示定点数（定点数和浮点数类似，都是小数）</p>
+<ul>
+<li>字符串格式化符号的含义：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#&#22312;&#32622;&#20301;&#31526;&#20013;&#20351;&#29992;&#26102;&#19981;&#24102;&#39;%&#39;&#10;%c  &#26684;&#24335;&#21270;&#23383;&#31526;&#21450;&#20854;ASCII&#30721;&#10;%s  &#26684;&#24335;&#21270;&#23383;&#31526;&#20018;&#10;%d  &#26684;&#24335;&#21270;&#25972;&#25968;&#10;%o  &#26684;&#24335;&#21270;&#26080;&#31526;&#21495;&#20843;&#36827;&#21046;&#25968;&#10;%x  &#26684;&#24335;&#21270;&#26080;&#31526;&#21495;&#21313;&#20845;&#36827;&#21046;&#25968;&#10;%X  &#26684;&#24335;&#21270;&#26080;&#31526;&#21495;&#21313;&#20845;&#36827;&#21046;&#25968;&#65288;&#22823;&#20889;&#65289;&#10;%f  &#26684;&#24335;&#21270;&#23450;&#28857;&#25968;&#65292;&#21487;&#25351;&#23450;&#23567;&#25968;&#28857;&#21518;&#30340;&#31934;&#24230;&#10;%e  &#29992;&#31185;&#23398;&#35745;&#25968;&#27861;&#26684;&#24335;&#21270;&#23450;&#28857;&#25968;&#10;%E  &#29992;&#31185;&#23398;&#35745;&#25968;&#27861;&#26684;&#24335;&#21270;&#23450;&#28857;&#25968;&#65288;&#22823;&#20889;E&#65289;&#10;%g  &#26681;&#25454;&#20540;&#30340;&#22823;&#23567;&#20915;&#23450;&#20351;&#29992;%f&#25110;&#32773;%e&#10;%G  &#26681;&#25454;&#20540;&#30340;&#22823;&#23567;&#20915;&#23450;&#20351;&#29992;%F&#25110;&#32773;%E</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="2-格式化符号的使用"><a href="#2-格式化符号的使用" class="headerlink" title="2. 格式化符号的使用"></a>2. 格式化符号的使用</h3><ul>
+<li><p>先看例子：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'%c'</span> % <span class="number">97</span></span><br><span class="line"><span class="comment">#返回：'a'</span></span><br><span class="line"><span class="string">'%c %c %c %c %c %c'</span> % (<span class="number">65</span>, <span class="number">66</span>, <span class="number">67</span>, <span class="number">97</span>, <span class="number">98</span>, <span class="number">99</span>)</span><br><span class="line"><span class="comment">#返回：'A B C a b c'。这里使用元组表示参数列表，且必须要有()</span></span><br><span class="line"></span><br><span class="line"><span class="string">'%s'</span> % <span class="string">'I love you'</span></span><br><span class="line"><span class="comment">#返回：'I love you'</span></span><br><span class="line"></span><br><span class="line"><span class="string">'%d + %d = %d'</span> % (<span class="number">4</span>, <span class="number">5</span>, <span class="number">4</span> + <span class="number">5</span>)</span><br><span class="line"><span class="comment">#返回：'4 + 5 = 9'</span></span><br><span class="line"></span><br><span class="line"><span class="string">'%o'</span> % <span class="number">10</span></span><br><span class="line"><span class="comment">#返回：'12'。这里需要注意，是将十进制的10转换为八进制的12，不要弄反了</span></span><br><span class="line"></span><br><span class="line"><span class="string">'%x'</span> % <span class="number">10</span></span><br><span class="line"><span class="comment">#返回：'a'</span></span><br><span class="line"></span><br><span class="line"><span class="string">'%X'</span> % <span class="number">10</span></span><br><span class="line"><span class="comment">#返回：'A'</span></span><br><span class="line"></span><br><span class="line"><span class="string">'%f'</span> % <span class="number">27.658</span></span><br><span class="line"><span class="comment">#返回：'27.658000'。定点数格式化默认使用六位小数</span></span><br><span class="line"></span><br><span class="line"><span class="string">'%e'</span> % <span class="number">27.658</span></span><br><span class="line"><span class="comment">#返回：'2.765800e+01'</span></span><br><span class="line"></span><br><span class="line"><span class="string">'%E'</span> % <span class="number">27.658</span></span><br><span class="line"><span class="comment">#返回：'2.765800E+01'</span></span><br><span class="line"></span><br><span class="line"><span class="string">'%g'</span> % <span class="number">27.658</span></span><br><span class="line"><span class="string">'%g'</span> % <span class="number">27.658000</span></span><br><span class="line"><span class="string">'%g'</span> % <span class="number">2.765800e+01</span></span><br><span class="line"><span class="comment">#上述三个都返回：'27.658'</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>除了这些格式化符号外，我们还有格式化操作辅助指令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">m.n     m&#26159;&#26174;&#31034;&#30340;&#26368;&#23567;&#24635;&#23485;&#24230;&#65292;n&#26159;&#23567;&#25968;&#28857;&#21518;&#30340;&#20301;&#25968;&#10;-       &#29992;&#20110;&#24038;&#23545;&#40784;&#10;+       &#22312;&#27491;&#25968;&#21069;&#38754;&#26174;&#31034;&#27491;&#36127;&#21495;&#10;#       &#22312;&#20843;&#36827;&#21046;&#25968;&#21069;&#38754;&#26174;&#31034;&#39;0o&#39;&#65292;&#22312;&#21313;&#20845;&#36827;&#21046;&#25968;&#21069;&#38754;&#26174;&#31034;&#39;0x&#39;&#25110;&#32773;&#39;0X&#39;&#10;0       &#26174;&#31034;&#30340;&#25968;&#23383;&#21069;&#38754;&#22635;&#20805;&#39;0&#39;&#21462;&#20195;&#31354;&#26684;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>来看例子：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'%5.1f'</span> % <span class="number">27.658</span></span><br><span class="line"><span class="comment">#返回：' 27.7'</span></span><br><span class="line"></span><br><span class="line"><span class="string">'%.2e'</span> % <span class="number">27.658</span></span><br><span class="line"><span class="comment">#返回：'2.77e+01'</span></span><br><span class="line"></span><br><span class="line"><span class="string">'%10d'</span> % <span class="number">9</span></span><br><span class="line"><span class="comment">#返回：'         9'</span></span><br><span class="line"></span><br><span class="line"><span class="string">'%-10d'</span> % <span class="number">9</span></span><br><span class="line"><span class="comment">#返回：'9         '</span></span><br><span class="line"></span><br><span class="line"><span class="string">'%+d'</span> % <span class="number">5</span></span><br><span class="line"><span class="comment">#返回：'+5'</span></span><br><span class="line"></span><br><span class="line"><span class="string">'%+d'</span> % -<span class="number">5</span></span><br><span class="line"><span class="comment">#返回：'-5'</span></span><br><span class="line"></span><br><span class="line"><span class="string">'%#o'</span> % <span class="number">10</span></span><br><span class="line"><span class="comment">#返回：'0o12'</span></span><br><span class="line"></span><br><span class="line"><span class="string">'%#x'</span> % <span class="number">108</span></span><br><span class="line"><span class="comment">#返回：'0x6c'</span></span><br><span class="line"></span><br><span class="line"><span class="string">'%#d'</span> % <span class="number">10</span></span><br><span class="line"><span class="comment">#返回：'10'</span></span><br><span class="line"></span><br><span class="line"><span class="string">'%010d'</span> % <span class="number">9</span></span><br><span class="line"><span class="comment">#返回：'0000000009'</span></span><br><span class="line"></span><br><span class="line"><span class="string">'%-010d'</span> % <span class="number">9</span></span><br><span class="line"><span class="comment">#返回：'9         '。注意到只有数字前面才填充0。如果在后面加会改变数字</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="3-转义字符"><a href="#3-转义字符" class="headerlink" title="3. 转义字符"></a>3. 转义字符</h3><ul>
+<li>转义字符有：<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">\'  单引号</span><br><span class="line">\"  双引号</span><br><span class="line">\a  发出系统响铃</span><br><span class="line">\b  退格符</span><br><span class="line">\n  换行符</span><br><span class="line">\t  水平制表符</span><br><span class="line">\v  垂直制表符</span><br><span class="line">\r  回车符</span><br><span class="line">\f  换页符</span><br><span class="line">\o  八进制数代表的字符</span><br><span class="line">\x  十六进制数代表的字符</span><br><span class="line">\0  空字符</span><br><span class="line">\\  反斜杠</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="4-补充"><a href="#4-补充" class="headerlink" title="4. 补充"></a>4. 补充</h3><ul>
+<li>一个进制转换的例子<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span> <span class="number">1</span>:</span><br><span class="line">    inp = input(<span class="string">'请输入一个整数（输入Q程序结束）：'</span>)</span><br><span class="line">    <span class="keyword">if</span> inp == <span class="string">'Q'</span> <span class="keyword">or</span> inp == <span class="string">'q'</span>:</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line">    <span class="keyword">if</span> inp == <span class="string">''</span>:</span><br><span class="line">        <span class="keyword">continue</span></span><br><span class="line">    num = int(inp)</span><br><span class="line">    print(<span class="string">'十进制 -&gt; 十六进制：\t %d -&gt; 0x%x'</span> % (num, num))</span><br><span class="line">    print(<span class="string">'十进制 -&gt; 八进制：\t %d -&gt; 0o%o'</span> % (num, num))</span><br><span class="line">    print(<span class="string">'十进制 -&gt; 二进制：\t %d -&gt;'</span> % num, bin(num))</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="完"><a href="#完" class="headerlink" title="完"></a>完</h2><blockquote>
+<p>2015年7月13日，增加补充部分</p>
+</blockquote>
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2015/06/PythonStudy-6/">Python学习（6）：字符串格式化&amp;格式化符号</a></p>
+        <p><span>文章作者:</span><a href="/" title="访问 Lancelot 的个人博客">Lancelot</a></p>
+        <p><span>发布时间:</span>2015年06月11日 - 00时00分</p>
+        <p><span>最后更新:</span>2016年02月21日 - 12时56分</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2015/06/PythonStudy-6/" title="Python学习（6）：字符串格式化&amp;格式化符号">http://darknight.me/2015/06/PythonStudy-6/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://darknight.me/2015/06/PythonStudy-6/　　作者: Lancelot" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script src="/js/clipboard.min.js"></script>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" title="中国大陆 (CC BY-NC-SA 3.0 CN)" target = "_blank">"署名-非商用-相同方式共享 3.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+            <div id="article-nav-newer" class="article-nav-title">
+                <a href="/2015/06/PythonStudy-7/">
+                    Python学习（7）：序列
+                </a>
+            </div>
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2015/06/PythonStudy-5/">
+                    Python学习（5）：元组&amp;字符串内置函数
+                </a>
+            </div>
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-字符串格式化"><span class="toc-number">1.</span> <span class="toc-text">1. 字符串格式化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-格式化符号的使用"><span class="toc-number">2.</span> <span class="toc-text">2. 格式化符号的使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-转义字符"><span class="toc-number">3.</span> <span class="toc-text">3. 转义字符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-补充"><span class="toc-number">4.</span> <span class="toc-text">4. 补充</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#完"><span class="toc-number"></span> <span class="toc-text">完</span></a>
+</div>
+<style>
+    .left-col .switch-btn {
+        display: none;
+    }
+    .left-col .switch-area {
+        display: none;
+    }
+</style>
+
+<input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js" type="text/javascript"></script>
+<script>
+    var valueHide = "隐藏目录";
+    var valueShow = "显示目录";
+
+    if ($(".left-col").is(":hidden")) {
+        $("#tocButton").attr("value", valueShow);
+    }
+
+    $("#tocButton").click(function() {
+        if ($("#toc").is(":hidden")) {
+            $("#tocButton").attr("value", valueHide);
+            $("#toc").slideDown(320);
+            $(".switch-btn, .switch-area").fadeOut(300);
+        }
+        else {
+            $("#tocButton").attr("value", valueShow);
+            $("#toc").slideUp(350);
+            $(".switch-btn, .switch-area").fadeIn(500);
+        }
+    })
+
+    if ($(".toc").length < 1) {
+        $("#toc, #tocButton").hide();
+        $(".switch-btn, .switch-area").show();
+    }
+</script>
+
+
+
+
+    <div class="share">
+    <div class="bdsharebuttonbox">
+    <a href="#" class="bds_more" data-cmd="more"></a>
+    <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a href="#" class="bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+    <a href="#" class="bds_copy" data-cmd="copy" title="复制网址"></a>
+    <a href="#" class="bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+    <a href="#" class="bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+    </div>
+    <script>
+        window._bd_share_config={
+            "common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+    </script>
+</div>
+
+
+
+    
+      <div class="duoshuo" id="comments">
+    <!-- 多说评论框 start -->
+    <div class="ds-thread" data-thread-key="2015/06/PythonStudy-6/" data-title="Python学习（6）：字符串格式化&amp;格式化符号" data-url="http://darknight.me/2015/06/PythonStudy-6/"></div>
+    <!-- 多说评论框 end -->
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+    <script type="text/javascript">
+    var duoshuoQuery = {short_name:"darknight"};
+    (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0] 
+         || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+    </script>
+    <!-- 多说公共JS代码 end -->
+</div>
+
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2015/06/PythonStudy-7/" title="上一篇: Python学习（7）：序列">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2015/06/PythonStudy-5/" title="下一篇: Python学习（5）：元组&amp;字符串内置函数">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016/02/JavaScript-4/">JavaScript中的那些方法：字符串</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/JavaScript-3/">JavaScript中的那些方法：数组</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/JavaScript-2/">JavaScript中的那些方法：计算</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/JavaScript-1/">JavaScript中的那些方法：函数</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/Skills-1/">那些你应该知道的编程技巧</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/09/Spring-1/">Spring服务器设置文件上传限制</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/09/PythonStudy-42/">Python学习（42）：爬虫：Scrapy</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/08/PythonStudy-41/">Python学习（41）：爬虫：异常处理</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/08/PythonStudy-40/">Python学习（40）：正则表达式2</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/08/PythonStudy-39/">Python学习（39）：正则表达式</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/08/PythonStudy-38/">Python学习（38）：爬虫：隐藏</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/08/PythonStudy-37/">Python学习（37）：爬虫：实战</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/08/PythonStudy-36/">Python学习（36）：爬虫：基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/08/PythonStudy-35/">Python学习（35）：模块学习：像极客一样思考</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/08/PythonStudy-34/">Python学习（34）：模块：\__name__=='\__main__'、搜索路径和包</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/08/PythonStudy-33/">Python学习（33）：模块</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/08/PythonStudy-32/">Python学习（32）：生成器</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/08/Python-7/">Python3正则表达式特殊符号及用法</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/08/Python-5/">Python中集合的内建方法总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/08/Python-4/">Python中的HTTP状态码</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/07/PythonStudy-30/">Python学习（30）：魔法方法：定制序列</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/07/PythonStudy-31/">Python学习（31）：魔法方法：迭代器</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/07/PythonStudy-29/">Python学习（29）：魔法方法：描述符（property的原理）</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/07/PythonStudy-28/">Python学习（28）：魔法方法：属性访问</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/07/PythonStudy-27/">Python学习（27）：魔法方法：一个计时器的定制</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/07/PythonStudy-26/">Python学习（26）：魔法方法：算术运算</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/07/PythonStudy-24/">Python学习（24）：类与对象BIF</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/07/PythonStudy-25/">Python学习（25）：魔法方法：构造和析构</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/07/PythonStudy-23/">Python学习（23）：类与对象拾遗</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/07/PythonStudy-22/">Python学习（22）：继承</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/07/PythonStudy-21/">Python学习（21）：类与对象</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/07/PythonStudy-20/">Python学习（20）：EasyGui入门</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/07/PythonStudy-19/">Python学习（19）：else语句&with语句</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/07/PythonStudy-18/">Python学习（18）：异常处理</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/07/PythonStudy-17/">Python学习（17）：永久存储（pickle模块）</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/07/PythonStudy-16/">Python学习（16）：模块&文件系统</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/07/Python-3/">Python魔法方法详解</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/07/Python-6/">Python编码问题的解决方案总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/07/Python-8/">Python：time模块详解</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/07/Python-9/">Python：timeit模块详解</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/07/Python-1/">Python鸭子类型</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/07/Python-2/">Python标准异常</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/07/PythonStudy-15/">Python学习（15）：文件</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/06/PythonStudy-14/">Python学习（14）：集合</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/06/PythonStudy-13/">Python学习（13）：字典</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/06/PythonStudy-12/">Python学习（12）：递归</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/06/PythonStudy-11/">Python学习（11）：lambda表达式、filter和map</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/06/PythonStudy-10/">Python学习（10）：内嵌函数和闭包</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/06/PythonStudy-9/">Python学习（9）：函数作用域</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/06/PythonStudy-8/">Python学习（8）：函数基础，函数文档及灵活的参数列表</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/06/PythonStudy-7/">Python学习（7）：序列</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/06/PythonStudy-6/">Python学习（6）：字符串格式化&格式化符号</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/06/PythonStudy-5/">Python学习（5）：元组&字符串内置函数</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/06/PythonStudy-4/">Python学习（4）：列表</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/06/PythonStudy-3/">Python学习（3）：常用操作符&分支和循环</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/06/PythonStudy-2/">Python学习（2）：Python中的数据类型</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/06/PythonStudy-1/">Python学习（1）：Python入门</a></li></ul>
+    <script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+    <script>
+        $(".post-list").addClass("toc-article");
+        $(".post-list-item a").attr("target","_blank");
+        $("#post-nav-button > a:nth-child(2)").click(function() {
+            $(".fa-bars, .fa-times").toggle();
+            $(".post-list").toggle(300);
+            if ($(".toc").length > 0) {
+                $("#toc, #tocButton").toggle(200, function() {
+                    if ($(".switch-area").is(":visible")) {
+                        $("#toc, .switch-btn, .switch-area").toggle();
+                        $("#tocButton").attr("value", valueHide);
+                        }
+                    })
+            }
+            else {
+                $(".switch-btn, .switch-area").fadeToggle(300);
+            }
+        })
+    </script>
+
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                &copy; 2016 Lancelot
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的静态博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减双栏 Hexo 博客主题">Yelee</a> by MOxFIVE
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" >本站到访数: 
+                            <span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>, </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit">本页阅读量: 
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+    </div>
+    
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js" type="text/javascript"></script>
+<script src="/js/main.js" type="text/javascript"></script>
+
+    <script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 5;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+
+<script>
+    $(document).ready(function() {
+        if ($("#comments").length < 1) {
+            $("#scroll > a:nth-child(2)").hide();
+        };
+    })
+</script>
+
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+</body>
+</html>

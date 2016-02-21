@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Python学习（26）：魔法方法：算术运算 | DarKnight</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="1. 工厂函数
+先看下面的例子：
+123456789101112type(len)#返回：&amp;lt;class &apos;builtin_function_or_method&apos;&amp;gt;type(dir)#返回：&amp;lt;class &apos;builtin_function_or_method&apos;&amp;gt;type(int)#返回：&amp;lt;class &apos;type&apos;&amp;gt;type(list)#返回：&amp;lt;class &apos;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python学习（26）：魔法方法：算术运算">
+<meta property="og:url" content="http://darknight.me/2015/07/PythonStudy-26/index.html">
+<meta property="og:site_name" content="DarKnight">
+<meta property="og:description" content="1. 工厂函数
+先看下面的例子：
+123456789101112type(len)#返回：&amp;lt;class &apos;builtin_function_or_method&apos;&amp;gt;type(dir)#返回：&amp;lt;class &apos;builtin_function_or_method&apos;&amp;gt;type(int)#返回：&amp;lt;class &apos;type&apos;&amp;gt;type(list)#返回：&amp;lt;class &apos;">
+<meta property="og:updated_time" content="2016-02-21T05:40:25.418Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Python学习（26）：魔法方法：算术运算">
+<meta name="twitter:description" content="1. 工厂函数
+先看下面的例子：
+123456789101112type(len)#返回：&amp;lt;class &apos;builtin_function_or_method&apos;&amp;gt;type(dir)#返回：&amp;lt;class &apos;builtin_function_or_method&apos;&amp;gt;type(int)#返回：&amp;lt;class &apos;type&apos;&amp;gt;type(list)#返回：&amp;lt;class &apos;">
+  
+    <link rel="alternative" href="/atom.xml" title="DarKnight" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+      <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css" type="text/css">
+  
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  
+  
+      <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  
+  <script>
+      var yiliaConfig = {
+          fancybox: true,
+          animate: true,
+          isHome: false,
+          isPost: true,
+          isArchive: false,
+          isTag: false,
+          isCategory: false,
+          open_in_new: false
+      }
+  </script>
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            
+            <img lazy-src="/img/photo.png" class="js-avatar">
+            
+        </a>
+
+        <hgroup>
+          <h1 class="header-author"><a href="/">Lancelot</a></h1>
+        </hgroup>
+
+        
+        <p class="header-subtitle">拖延癌治疗阶段</p>
+        
+                
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <li id="Email"><a class="Email" target="_blank" href="mailto:darknight4lancelot@gmail.com" title="Email"></a></li>
+                            
+                                <li id="新浪微博"><a class="新浪微博" target="_blank" href="http://weibo.com/u/2556148711" title="新浪微博"></a></li>
+                            
+                                <li id="GitHub"><a class="GitHub" target="_blank" href="https://github.com/wanghaoxyq" title="GitHub"></a></li>
+                            
+                                <li id="网易云音乐"><a class="网易云音乐" target="_blank" href="http://music.163.com/#/user/home?id=42137986" title="网易云音乐"></a></li>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/JavaScript/" style="font-size: 14px;">JavaScript</a> <a href="/tags/Python/" style="font-size: 16px;">Python</a> <a href="/tags/Python学习笔记/" style="font-size: 18px;">Python学习笔记</a> <a href="/tags/Spring/" style="font-size: 10px;">Spring</a> <a href="/tags/fishc-com/" style="font-size: 20px;">fishc.com</a> <a href="/tags/代码编写技巧/" style="font-size: 10px;">代码编写技巧</a> <a href="/tags/正则表达式/" style="font-size: 12px;">正则表达式</a>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="https://hexo.io">Hexo</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="https://pages.github.com/">GitHub</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://moxfive.xyz/">MOxFIVE</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">生命在于折腾</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">Lancelot</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                
+                    <img lazy-src="/img/photo.png" class="js-avatar">
+                
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">Lancelot</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">拖延癌治疗阶段</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <li id="Email"><a class="Email" target="_blank" href="mailto:darknight4lancelot@gmail.com" title="Email"></a></li>
+                            
+                                <li id="新浪微博"><a class="新浪微博" target="_blank" href="http://weibo.com/u/2556148711" title="新浪微博"></a></li>
+                            
+                                <li id="GitHub"><a class="GitHub" target="_blank" href="https://github.com/wanghaoxyq" title="GitHub"></a></li>
+                            
+                                <li id="网易云音乐"><a class="网易云音乐" target="_blank" href="http://music.163.com/#/user/home?id=42137986" title="网易云音乐"></a></li>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+</nav>
+      <div class="body-wrap"><article id="post-PythonStudy-26" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/07/PythonStudy-26/" class="article-date">
+      <time datetime="2015-07-19T16:00:00.000Z" itemprop="datePublished">2015-07-20</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Python学习（26）：魔法方法：算术运算
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python学习笔记/">Python学习笔记</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/fishc-com/">fishc.com</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h3 id="1-工厂函数"><a href="#1-工厂函数" class="headerlink" title="1. 工厂函数"></a>1. 工厂函数</h3><ul>
+<li><p>先看下面的例子：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">type(len)</span><br><span class="line"><span class="comment">#返回：&lt;class 'builtin_function_or_method'&gt;</span></span><br><span class="line">type(dir)</span><br><span class="line"><span class="comment">#返回：&lt;class 'builtin_function_or_method'&gt;</span></span><br><span class="line">type(int)</span><br><span class="line"><span class="comment">#返回：&lt;class 'type'&gt;</span></span><br><span class="line">type(list)</span><br><span class="line"><span class="comment">#返回：&lt;class 'type'&gt;</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">C</span>:</span></span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line">type(C)</span><br><span class="line"><span class="comment">#返回：&lt;class 'type'&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>上面的C在定义时是一个类，定义完之后，C就是类对象。所谓的工厂函数，就是类对象。</p>
+</li>
+</ul>
+<a id="more"></a>
+<ul>
+<li>比如：int(‘123’)在以前是将字符串’123’转换为整型123的，现在，则是实例化一个 int 的对象，然后将’123’作为参数传递给该对象<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">a = int(<span class="string">'123'</span>)</span><br><span class="line">b = int(<span class="string">'456'</span>)</span><br><span class="line">a + b</span><br><span class="line"><span class="comment">#返回：579。这里的a和b都是实例对象，那么我们可以看到：对象是可以进行计算的</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="2-对象算术运算魔法方法"><a href="#2-对象算术运算魔法方法" class="headerlink" title="2. 对象算术运算魔法方法"></a>2. 对象算术运算魔法方法</h3><ul>
+<li>下面这些魔法方法用于对对象的运算进行处理，如果需要修改运算规则，那么就要对它们进行重写：<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">__add__(self, other)            <span class="comment">#定义加法的行为：+</span></span><br><span class="line">__sub__(self, other)            <span class="comment">#定义减法的行为：-</span></span><br><span class="line">__mul__(self, other)            <span class="comment">#定义乘法的行为：*</span></span><br><span class="line">__truediv__(self, other)        <span class="comment">#定义真除法的行为：/</span></span><br><span class="line">__floordiv__(self, other)       <span class="comment">#定义整数除法的行为：//</span></span><br><span class="line">__mod__(self, other)            <span class="comment">#定义取模算法的行为：%</span></span><br><span class="line">__divmod__(self, other)         <span class="comment">#定义当被divmod()调用时的行为</span></span><br><span class="line">__pow__(self, other[, modulo])  <span class="comment">#定义当被power()调用或**运算时的行为</span></span><br><span class="line">__lshift__(self, other)         <span class="comment">#定义按位左移位的行为：&lt;&lt;</span></span><br><span class="line">__rshift__(self, other)         <span class="comment">#定义按位右移位的行为：&gt;&gt;</span></span><br><span class="line">__and__(self, other)            <span class="comment">#定义按位与操作的行为：&amp;</span></span><br><span class="line">__xor__(self, other)            <span class="comment">#定义按位异或操作的行为：^</span></span><br><span class="line">__or__(self, other)             <span class="comment">#定义按位或操作的行为：|</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#divmod(a, b)方法返回的是元组：(a // b, a % b)</span></span><br><span class="line">divmod(<span class="number">5</span>, <span class="number">3</span>)</span><br><span class="line"><span class="comment">#返回：(1, 2)</span></span><br><span class="line">divmod(<span class="number">8</span>, <span class="number">2</span>)</span><br><span class="line"><span class="comment">#返回：(4, 0)</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>例子：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">NewInt</span><span class="params">(int)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__add__</span><span class="params">(self, other)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> int.__sub__(self, other)</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__sub__</span><span class="params">(self, other)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> int.__add__(self, other)</span><br><span class="line"></span><br><span class="line">a = NewInt(<span class="number">16</span>)</span><br><span class="line">a + <span class="number">8</span></span><br><span class="line"><span class="comment">#返回：8</span></span><br><span class="line">a - <span class="number">12</span></span><br><span class="line"><span class="comment">#返回：28</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>如果不想直接调用int的魔法方法，怎么做？一个错误的例子：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TryInt</span><span class="params">(int)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__add__</span><span class="params">(self, other)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> self + other</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__sub__</span><span class="params">(self, other)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> self - other</span><br><span class="line"><span class="comment">#这里的定义是有问题的，因为int中的__add__()定义的就是'+'的行为，这里重写之后的__add__()方法等同于进行无返回值的递归，会因达到最大递归深度而报错：RuntimeError</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#上面这个例子如果要改，可以修改为下面这样：</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TryInt</span><span class="params">(int)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__add__</span><span class="params">(self, other)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> int(self) + int(other)</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__sub__</span><span class="params">(self, other)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> int(self) - int(other)</span><br><span class="line"><span class="comment">#经过这样的修改之后，进行运算的就是整型实例的值，而不是对象本身，不会出现无限递归的问题</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="3-反运算"><a href="#3-反运算" class="headerlink" title="3. 反运算"></a>3. 反运算</h3><ul>
+<li><p>正常运算时，比如：a + b，是以a为主导的，这里调用了魔法方法__add<strong>()。但是如果表达式中的a没有\</strong>add<strong>()方法时，就会调用b的反运算方法\</strong>radd__()。<br>请看例子：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Nint</span><span class="params">(int)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__radd__</span><span class="params">(self, other)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> int.__sub__(self, other)</span><br><span class="line"></span><br><span class="line">a = Nint(<span class="number">5</span>)</span><br><span class="line">b = Nint(<span class="number">3</span>)</span><br><span class="line">a + b</span><br><span class="line"><span class="comment">#返回：8</span></span><br><span class="line"><span class="number">1</span> + b</span><br><span class="line"><span class="comment">#返回：2</span></span><br><span class="line"><span class="comment">#这里的'1'是没有__add__方法的，所以调用了b的反运算方法__radd__，里面实际使用的是int.__sub__(3, 1)，所以返回2。</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>第二段中的所有算术运算魔法方法都有对应的反运算魔法方法</strong></p>
+</li>
+</ul>
+<h3 id="4-增量赋值运算"><a href="#4-增量赋值运算" class="headerlink" title="4. 增量赋值运算"></a>4. 增量赋值运算</h3><ul>
+<li>增量赋值就是类似于 a += b 这种形式的计算，<strong>除了<strong>divmod</strong>()，第二段中的所有算术运算魔法方法也都有对应的增量赋值运算魔法方法</strong><br>请看例子：<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Nint</span><span class="params">(int)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__iadd__</span><span class="params">(self, other)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> int.__sub__(self, other)</span><br><span class="line">a = Nint(<span class="number">9</span>)</span><br><span class="line">a += <span class="number">3</span></span><br><span class="line">a</span><br><span class="line"><span class="comment">#返回：6</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="5-一元操作符"><a href="#5-一元操作符" class="headerlink" title="5. 一元操作符"></a>5. 一元操作符</h3><ul>
+<li>只有一个操作数的操作符：<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">__pos__(self)       <span class="comment">#定义正号的行为：+x</span></span><br><span class="line">__neg__(self)       <span class="comment">#定义负号的行为：-x  </span></span><br><span class="line">__abc__(self)       <span class="comment">#定义当被abs()调用时的行为</span></span><br><span class="line">__invert__(self)    <span class="comment">#定义按位求反的行为：~x</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="完"><a href="#完" class="headerlink" title="完"></a>完</h2>
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2015/07/PythonStudy-26/">Python学习（26）：魔法方法：算术运算</a></p>
+        <p><span>文章作者:</span><a href="/" title="访问 Lancelot 的个人博客">Lancelot</a></p>
+        <p><span>发布时间:</span>2015年07月20日 - 00时00分</p>
+        <p><span>最后更新:</span>2016年02月21日 - 13时40分</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2015/07/PythonStudy-26/" title="Python学习（26）：魔法方法：算术运算">http://darknight.me/2015/07/PythonStudy-26/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://darknight.me/2015/07/PythonStudy-26/　　作者: Lancelot" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script src="/js/clipboard.min.js"></script>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" title="中国大陆 (CC BY-NC-SA 3.0 CN)" target = "_blank">"署名-非商用-相同方式共享 3.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+            <div id="article-nav-newer" class="article-nav-title">
+                <a href="/2015/07/PythonStudy-27/">
+                    Python学习（27）：魔法方法：一个计时器的定制
+                </a>
+            </div>
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2015/07/PythonStudy-24/">
+                    Python学习（24）：类与对象BIF
+                </a>
+            </div>
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-工厂函数"><span class="toc-number">1.</span> <span class="toc-text">1. 工厂函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-对象算术运算魔法方法"><span class="toc-number">2.</span> <span class="toc-text">2. 对象算术运算魔法方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-反运算"><span class="toc-number">3.</span> <span class="toc-text">3. 反运算</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-增量赋值运算"><span class="toc-number">4.</span> <span class="toc-text">4. 增量赋值运算</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-一元操作符"><span class="toc-number">5.</span> <span class="toc-text">5. 一元操作符</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#完"><span class="toc-number"></span> <span class="toc-text">完</span></a>
+</div>
+<style>
+    .left-col .switch-btn {
+        display: none;
+    }
+    .left-col .switch-area {
+        display: none;
+    }
+</style>
+
+<input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js" type="text/javascript"></script>
+<script>
+    var valueHide = "隐藏目录";
+    var valueShow = "显示目录";
+
+    if ($(".left-col").is(":hidden")) {
+        $("#tocButton").attr("value", valueShow);
+    }
+
+    $("#tocButton").click(function() {
+        if ($("#toc").is(":hidden")) {
+            $("#tocButton").attr("value", valueHide);
+            $("#toc").slideDown(320);
+            $(".switch-btn, .switch-area").fadeOut(300);
+        }
+        else {
+            $("#tocButton").attr("value", valueShow);
+            $("#toc").slideUp(350);
+            $(".switch-btn, .switch-area").fadeIn(500);
+        }
+    })
+
+    if ($(".toc").length < 1) {
+        $("#toc, #tocButton").hide();
+        $(".switch-btn, .switch-area").show();
+    }
+</script>
+
+
+
+
+    <div class="share">
+    <div class="bdsharebuttonbox">
+    <a href="#" class="bds_more" data-cmd="more"></a>
+    <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a href="#" class="bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+    <a href="#" class="bds_copy" data-cmd="copy" title="复制网址"></a>
+    <a href="#" class="bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+    <a href="#" class="bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+    </div>
+    <script>
+        window._bd_share_config={
+            "common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+    </script>
+</div>
+
+
+
+    
+      <div class="duoshuo" id="comments">
+    <!-- 多说评论框 start -->
+    <div class="ds-thread" data-thread-key="2015/07/PythonStudy-26/" data-title="Python学习（26）：魔法方法：算术运算" data-url="http://darknight.me/2015/07/PythonStudy-26/"></div>
+    <!-- 多说评论框 end -->
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+    <script type="text/javascript">
+    var duoshuoQuery = {short_name:"darknight"};
+    (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0] 
+         || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+    </script>
+    <!-- 多说公共JS代码 end -->
+</div>
+
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2015/07/PythonStudy-27/" title="上一篇: Python学习（27）：魔法方法：一个计时器的定制">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2015/07/PythonStudy-24/" title="下一篇: Python学习（24）：类与对象BIF">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016/02/JavaScript-4/">JavaScript中的那些方法：字符串</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/JavaScript-3/">JavaScript中的那些方法：数组</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/JavaScript-2/">JavaScript中的那些方法：计算</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/JavaScript-1/">JavaScript中的那些方法：函数</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/Skills-1/">那些你应该知道的编程技巧</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/09/Spring-1/">Spring服务器设置文件上传限制</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/09/PythonStudy-42/">Python学习（42）：爬虫：Scrapy</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/08/PythonStudy-41/">Python学习（41）：爬虫：异常处理</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/08/PythonStudy-40/">Python学习（40）：正则表达式2</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/08/PythonStudy-39/">Python学习（39）：正则表达式</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/08/PythonStudy-38/">Python学习（38）：爬虫：隐藏</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/08/PythonStudy-37/">Python学习（37）：爬虫：实战</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/08/PythonStudy-36/">Python学习（36）：爬虫：基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/08/PythonStudy-35/">Python学习（35）：模块学习：像极客一样思考</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/08/PythonStudy-34/">Python学习（34）：模块：\__name__=='\__main__'、搜索路径和包</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/08/PythonStudy-33/">Python学习（33）：模块</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/08/PythonStudy-32/">Python学习（32）：生成器</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/08/Python-7/">Python3正则表达式特殊符号及用法</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/08/Python-5/">Python中集合的内建方法总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/08/Python-4/">Python中的HTTP状态码</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/07/PythonStudy-30/">Python学习（30）：魔法方法：定制序列</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/07/PythonStudy-31/">Python学习（31）：魔法方法：迭代器</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/07/PythonStudy-29/">Python学习（29）：魔法方法：描述符（property的原理）</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/07/PythonStudy-28/">Python学习（28）：魔法方法：属性访问</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/07/PythonStudy-27/">Python学习（27）：魔法方法：一个计时器的定制</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/07/PythonStudy-26/">Python学习（26）：魔法方法：算术运算</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/07/PythonStudy-24/">Python学习（24）：类与对象BIF</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/07/PythonStudy-25/">Python学习（25）：魔法方法：构造和析构</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/07/PythonStudy-23/">Python学习（23）：类与对象拾遗</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/07/PythonStudy-22/">Python学习（22）：继承</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/07/PythonStudy-21/">Python学习（21）：类与对象</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/07/PythonStudy-20/">Python学习（20）：EasyGui入门</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/07/PythonStudy-19/">Python学习（19）：else语句&with语句</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/07/PythonStudy-18/">Python学习（18）：异常处理</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/07/PythonStudy-17/">Python学习（17）：永久存储（pickle模块）</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/07/PythonStudy-16/">Python学习（16）：模块&文件系统</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/07/Python-3/">Python魔法方法详解</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/07/Python-6/">Python编码问题的解决方案总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/07/Python-8/">Python：time模块详解</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/07/Python-9/">Python：timeit模块详解</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/07/Python-1/">Python鸭子类型</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/07/Python-2/">Python标准异常</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/07/PythonStudy-15/">Python学习（15）：文件</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/06/PythonStudy-14/">Python学习（14）：集合</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/06/PythonStudy-13/">Python学习（13）：字典</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/06/PythonStudy-12/">Python学习（12）：递归</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/06/PythonStudy-11/">Python学习（11）：lambda表达式、filter和map</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/06/PythonStudy-10/">Python学习（10）：内嵌函数和闭包</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/06/PythonStudy-9/">Python学习（9）：函数作用域</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/06/PythonStudy-8/">Python学习（8）：函数基础，函数文档及灵活的参数列表</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/06/PythonStudy-7/">Python学习（7）：序列</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/06/PythonStudy-6/">Python学习（6）：字符串格式化&格式化符号</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/06/PythonStudy-5/">Python学习（5）：元组&字符串内置函数</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/06/PythonStudy-4/">Python学习（4）：列表</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/06/PythonStudy-3/">Python学习（3）：常用操作符&分支和循环</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/06/PythonStudy-2/">Python学习（2）：Python中的数据类型</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/06/PythonStudy-1/">Python学习（1）：Python入门</a></li></ul>
+    <script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+    <script>
+        $(".post-list").addClass("toc-article");
+        $(".post-list-item a").attr("target","_blank");
+        $("#post-nav-button > a:nth-child(2)").click(function() {
+            $(".fa-bars, .fa-times").toggle();
+            $(".post-list").toggle(300);
+            if ($(".toc").length > 0) {
+                $("#toc, #tocButton").toggle(200, function() {
+                    if ($(".switch-area").is(":visible")) {
+                        $("#toc, .switch-btn, .switch-area").toggle();
+                        $("#tocButton").attr("value", valueHide);
+                        }
+                    })
+            }
+            else {
+                $(".switch-btn, .switch-area").fadeToggle(300);
+            }
+        })
+    </script>
+
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                &copy; 2016 Lancelot
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的静态博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减双栏 Hexo 博客主题">Yelee</a> by MOxFIVE
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" >本站到访数: 
+                            <span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>, </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit">本页阅读量: 
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+    </div>
+    
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js" type="text/javascript"></script>
+<script src="/js/main.js" type="text/javascript"></script>
+
+    <script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 5;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+
+<script>
+    $(document).ready(function() {
+        if ($("#comments").length < 1) {
+            $("#scroll > a:nth-child(2)").hide();
+        };
+    })
+</script>
+
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+</body>
+</html>

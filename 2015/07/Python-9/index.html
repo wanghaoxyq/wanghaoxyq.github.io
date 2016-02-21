@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Python：timeit模块详解 | DarKnight</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="来源：鱼C论坛timeit模块–准确测量小段代码的执行时间timeit模块提供了测量Python小段代码执行时间的方法。它即可以在命令行界面直接使用，也可以通过导入模块进行调用。该模块灵活地避开了测量执行时间所容易出现的错误。
+以下是命令行界面使用的例子：123456$ python -m timeit &apos;&quot;-&quot;.join(str(n) for n in range(100))&apos;10000 loo">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python：timeit模块详解">
+<meta property="og:url" content="http://darknight.me/2015/07/Python-9/index.html">
+<meta property="og:site_name" content="DarKnight">
+<meta property="og:description" content="来源：鱼C论坛timeit模块–准确测量小段代码的执行时间timeit模块提供了测量Python小段代码执行时间的方法。它即可以在命令行界面直接使用，也可以通过导入模块进行调用。该模块灵活地避开了测量执行时间所容易出现的错误。
+以下是命令行界面使用的例子：123456$ python -m timeit &apos;&quot;-&quot;.join(str(n) for n in range(100))&apos;10000 loo">
+<meta property="og:updated_time" content="2016-02-21T07:05:02.667Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Python：timeit模块详解">
+<meta name="twitter:description" content="来源：鱼C论坛timeit模块–准确测量小段代码的执行时间timeit模块提供了测量Python小段代码执行时间的方法。它即可以在命令行界面直接使用，也可以通过导入模块进行调用。该模块灵活地避开了测量执行时间所容易出现的错误。
+以下是命令行界面使用的例子：123456$ python -m timeit &apos;&quot;-&quot;.join(str(n) for n in range(100))&apos;10000 loo">
+  
+    <link rel="alternative" href="/atom.xml" title="DarKnight" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+      <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css" type="text/css">
+  
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  
+  
+      <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  
+  <script>
+      var yiliaConfig = {
+          fancybox: true,
+          animate: true,
+          isHome: false,
+          isPost: true,
+          isArchive: false,
+          isTag: false,
+          isCategory: false,
+          open_in_new: false
+      }
+  </script>
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            
+            <img lazy-src="/img/photo.png" class="js-avatar">
+            
+        </a>
+
+        <hgroup>
+          <h1 class="header-author"><a href="/">Lancelot</a></h1>
+        </hgroup>
+
+        
+        <p class="header-subtitle">拖延癌治疗阶段</p>
+        
+                
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <li id="Email"><a class="Email" target="_blank" href="mailto:darknight4lancelot@gmail.com" title="Email"></a></li>
+                            
+                                <li id="新浪微博"><a class="新浪微博" target="_blank" href="http://weibo.com/u/2556148711" title="新浪微博"></a></li>
+                            
+                                <li id="GitHub"><a class="GitHub" target="_blank" href="https://github.com/wanghaoxyq" title="GitHub"></a></li>
+                            
+                                <li id="网易云音乐"><a class="网易云音乐" target="_blank" href="http://music.163.com/#/user/home?id=42137986" title="网易云音乐"></a></li>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/JavaScript/" style="font-size: 14px;">JavaScript</a> <a href="/tags/Python/" style="font-size: 16px;">Python</a> <a href="/tags/Python学习笔记/" style="font-size: 18px;">Python学习笔记</a> <a href="/tags/Spring/" style="font-size: 10px;">Spring</a> <a href="/tags/fishc-com/" style="font-size: 20px;">fishc.com</a> <a href="/tags/代码编写技巧/" style="font-size: 10px;">代码编写技巧</a> <a href="/tags/正则表达式/" style="font-size: 12px;">正则表达式</a>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="https://hexo.io">Hexo</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="https://pages.github.com/">GitHub</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://moxfive.xyz/">MOxFIVE</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">生命在于折腾</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">Lancelot</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                
+                    <img lazy-src="/img/photo.png" class="js-avatar">
+                
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">Lancelot</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">拖延癌治疗阶段</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <li id="Email"><a class="Email" target="_blank" href="mailto:darknight4lancelot@gmail.com" title="Email"></a></li>
+                            
+                                <li id="新浪微博"><a class="新浪微博" target="_blank" href="http://weibo.com/u/2556148711" title="新浪微博"></a></li>
+                            
+                                <li id="GitHub"><a class="GitHub" target="_blank" href="https://github.com/wanghaoxyq" title="GitHub"></a></li>
+                            
+                                <li id="网易云音乐"><a class="网易云音乐" target="_blank" href="http://music.163.com/#/user/home?id=42137986" title="网易云音乐"></a></li>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+</nav>
+      <div class="body-wrap"><article id="post-Python-9" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/07/Python-9/" class="article-date">
+      <time datetime="2015-07-01T00:00:00.000Z" itemprop="datePublished">2015-07-01</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Python：timeit模块详解
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/">Python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/fishc-com/">fishc.com</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h2 id="来源：鱼C论坛"><a href="#来源：鱼C论坛" class="headerlink" title="来源：鱼C论坛"></a>来源：<a href="http://bbs.fishc.com/thread-55593-1-1.html" target="_blank" rel="external">鱼C论坛</a></h2><h3 id="timeit模块–准确测量小段代码的执行时间"><a href="#timeit模块–准确测量小段代码的执行时间" class="headerlink" title="timeit模块–准确测量小段代码的执行时间"></a>timeit模块–准确测量小段代码的执行时间</h3><p>timeit模块提供了测量Python小段代码执行时间的方法。它即可以在命令行界面直接使用，也可以通过导入模块进行调用。该模块灵活地避开了测量执行时间所容易出现的错误。</p>
+<p>以下是命令行界面使用的例子：<br><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ python -m timeit '"-".join(str(n) <span class="flow">for</span> n <span class="flow">in</span> range(<span class="number">100</span>))'</span><br><span class="line"><span class="number">10000</span> loops, best of <span class="number">3</span>: <span class="number">40</span>.<span class="number">3</span> usec per loop</span><br><span class="line">$ python -m timeit '"-".join([str(n) <span class="flow">for</span> n <span class="flow">in</span> range(<span class="number">100</span>)])'</span><br><span class="line"><span class="number">10000</span> loops, best of <span class="number">3</span>: <span class="number">33</span>.<span class="number">4</span> usec per loop</span><br><span class="line">$ python -m timeit '"-".join(map(str, range(<span class="number">100</span>)))'</span><br><span class="line"><span class="number">10000</span> loops, best of <span class="number">3</span>: <span class="number">25</span>.<span class="number">2</span> usec per loop</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>在命令行下运行出错，SyntaxError:EOL while scanning string literal<br>为什么出错？暂时不明白。</p>
+</blockquote>
+<p>以下是在Python下导入模块调用的例子：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> timeit</span><br><span class="line">timeit.timeit(<span class="string">'"-".join(str(n) for n in range(100))'</span>, number=<span class="number">10000</span>)</span><br><span class="line">timeit.timeit(<span class="string">'"-".join([str(n) for n in range(100)])'</span>, number=<span class="number">10000</span>)</span><br><span class="line">timeit.timeit(<span class="string">'"-".join(map(str, range(100)))'</span>, number=<span class="number">10000</span>)</span><br><span class="line"><span class="comment">#每次运行结果都不太一样，这里不记录</span></span><br></pre></td></tr></table></figure></p>
+<a id="more"></a>
+<p>需要注意的是，只有当使用命令行界面时，timeit才会自动明确重复的次数。</p>
+<h4 id="timeit模块"><a href="#timeit模块" class="headerlink" title="timeit模块"></a><strong>timeit模块</strong></h4><p>该模块定义了三个使用函数和一个公共类</p>
+<p><strong>timeit.timeit(stmt=’pass’, setup=’pass’, timer=<code>&lt;default timer&gt;</code>, number=1000000)</strong></p>
+<p>创建一个Timer实例，参数分别是stmt（需要测量的语句或函数），setup（初始化代码或构建环境的导入语句），timer（计时函数），number（每一次测量中语句被执行的次数）<br><em>注：由于timeit()正在执行语句，语句中如果存在返回值的话会阻止timeit()返回执行时间。timeit()会取代原语句中的返回值。</em></p>
+<p><strong>timeit.repeat(stmt=’pass’, setup=’pass’, timer=<code>&lt;default timer&gt;</code>, repeat=3, number=1000000)</strong></p>
+<p>创建一个Timer实例，参数分别是stmt（需要测量的语句或函数），setup（初始化代码或构建环境的导入语句），timer（计时函数），repeat（重复测量的次数），number（每一次测量中语句被执行的次数）</p>
+<p><strong>timeit.default_timer()</strong></p>
+<p>默认的计时器，一般是time.perf_counter()，time.perf_counter()方法能够在任一平台提供最高精度的计时器（它也只是记录了自然时间，记录自然时间会被很多其他因素影响，例如计算机的负载）</p>
+<p><strong>class timeit.Timer(stmt=’pass’, setup=’pass’, timer=<code>&lt;timer function&gt;</code>)</strong></p>
+<p>计算小段代码执行速度的类，构造函数需要的参数有stmt，setup，timer。前两个参数的默认值都是’pass’，timer参数是平台相关的；前两个参数都可以包含多个语句，多个语句间使用分号（;）或新行隔开。</p>
+<p>第一次测试语句的时间，可以使用timeit()方法；repeat()方法相当于持续多次调用timeit()方法并将结果返回为一个列表。</p>
+<p>stmt和setup参数也可以是可供调用但没有参数的对象，这将会在一个计时函数中嵌套调用它们，然后被timeit()所执行。注意，由于额外的调用，计时开销会相对略多。</p>
+<p><strong>-timeit(number=1000000)</strong></p>
+<p>功能：计算语句执行number次的时间。</p>
+<p>它会先执行一次setup参数的语句，然后计算stmt参数的语句执行number次的时间，返回值是以秒为单位的浮点数。number参数的默认值是一百万，stmt、setup和timer参数由timeit.Timer类的构造函数传递。</p>
+<p><em>注意：默认情况下，timeit()在计时的时候会暂时关闭Python的垃圾回收机制。这样做的优点是计时结果更具有可比性，但缺点是GC（garbage collection，垃圾回收机制的缩写）有时候是测量函数性能的一个重要组成部分。如果是这样的话，GC可以在setup参数执行第一条语句的时候被重新启动，例如：</em><br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">timeit.Timer(<span class="string">'for i in range(10):oct(i)'</span>, <span class="string">'gc.enable()'</span>).timeit()</span><br></pre></td></tr></table></figure></p>
+<p><strong>-repeat(repeat=3, number=1000000)</strong></p>
+<p>功能：重复调用timeit()。</p>
+<p>repeat()方法相当于持续多次调用timeit()方法并将结果返回为一个列表。repeat参数指定重复的次数，number参数传递给timeit()方法的number参数。</p>
+<p><em>注意：人们很容易计算出平均值和标准偏差，但这并不是非常有用。在典型的情况下，最低值取决于你的机器可以多快地运行给定的代码段；在结果中更高的那些值通常不是由于Python的速度导致，而是因为其他进程干扰了你的计时精度。所以，你所应感兴趣的只有结果的最低值（可以用min()求出）</em></p>
+<p><strong>-print_exc(file=None)</strong></p>
+<p>功能：输出计时代码的回溯（Traceback）<br>典型的用法：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">t = Timer(...)          <span class="comment"># outside the try/except</span></span><br><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    t.timeit(...)       <span class="comment"># or t.repeat(...)</span></span><br><span class="line"><span class="keyword">except</span> Exception:</span><br><span class="line">    t.print_exc()</span><br></pre></td></tr></table></figure></p>
+<p>标准回溯的优点是在编译模板中，源语句行会被显示出来。可选的file参数指定将回溯发送的位置，默认是发送到sys.stderr。</p>
+<h4 id="命令行界面"><a href="#命令行界面" class="headerlink" title="命令行界面"></a>命令行界面</h4><p>当被作为命令行程序调用时，可以使用下列选项：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python -m timeit [-n N] [-r N] [-s S] [-t] [-c] [-h] [statement ...]</span><br></pre></td></tr></table></figure></p>
+<p>各个选项的含义：<br>|选项|原型|含义|<br>|—-|—-|—-|<br>|-n N|–number=N|执行指定语句（段）的次数|<br>|-r N|–repeat=N|重复测量的次数（默认3次）|<br>|-s S|–setup=S|指定初始化代码或构建环境的导入语句（默认是pass）|<br>|-p|–process|测量进程时间而不是实际执行时间（使用time.process_time()代替默认的time.perf_counter()）|<br>|||以下是Python3.3以后新增|<br>|-t|–time|使用time.time()（不推荐）|<br>|-c|–clock|使用time.clock()（不推荐）|<br>|-v|–verbose|打印原始的计时结果，输出更大精度的数值|<br>|-h|–help|打印一个简短的用法信息并退出|</p>
+<h4 id="示例："><a href="#示例：" class="headerlink" title="示例："></a><strong>示例：</strong></h4><p>以下演示在开始的时候设置初始化语句：</p>
+<p>命令行：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python -m timeit -s &#39;text = &#34;I love you&#34;;char = &#34;o&#34;&#39; &#39;char in text&#39;&#10;python -m timeit -s &#39;text = &#34;I love you&#34;;char = &#34;o&#34;&#39; &#39;text.find(char)&#39;&#10;#&#36825;&#37324;&#36816;&#34892;&#36824;&#26159;&#25253;&#38169;&#65292;&#19981;&#30693;&#36947;&#20026;&#20160;&#20040;</span><br></pre></td></tr></table></figure></p>
+<p>在Python中使用timeit模块：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> timeit</span><br><span class="line">timeit.timeit(<span class="string">'char in text'</span>, setup=<span class="string">'text = "I love you";char = "o"'</span>)</span><br><span class="line">timeit.timeit(<span class="string">'text.find(char)'</span>, setup=<span class="string">'text = "I love you";char = "o"'</span>)</span><br></pre></td></tr></table></figure></p>
+<p>使用Timer对象：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> timeit</span><br><span class="line">t = timeit.Timer(<span class="string">'char in text'</span>, setup=<span class="string">'text = "I love you";char = "o"'</span>)</span><br><span class="line">t.timeit()</span><br><span class="line">t.repeat()</span><br></pre></td></tr></table></figure></p>
+<p><strong>以下演示包含多行语句如何进行测量：</strong><br>（我们通过hasattr()和try/except两种方法测试属性是否存在，并且比较它们之间的效率）<br>命令行：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python -m timeit &#39;try:&#39; &#39;   str.__bool__&#39; &#39;except AttributeError:&#39; &#39;    pass&#39;&#10;python -m timeit &#39;if hasattr(str, &#34;__bool__&#34;): pass&#39;&#10;&#10;python -m timeit &#39;try:&#39; &#39;   int.__bool__&#39; &#39;except AttributeError:&#39; &#39;    pass&#39;&#10;python -m timeit &#39;if hasattr(int, &#34;__bool__&#34;): pass&#39;</span><br></pre></td></tr></table></figure></p>
+<p>Python中使用timeit模块：<br>可以比较出，在没有该属性时，hasattr方法更有效率；有该属性时，try/except更为适合。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> timeit</span><br><span class="line"><span class="comment"># attribute is missing</span></span><br><span class="line"><span class="comment">#下面多行字符串第一行的\保证了以try开头，否则将以\n开头</span></span><br><span class="line">s = <span class="string">'''\</span><br><span class="line">try:</span><br><span class="line">    str.__bool__</span><br><span class="line">except AttributeError:</span><br><span class="line">    pass</span><br><span class="line">'''</span></span><br><span class="line">timeit.timeit(stmt=s, number=<span class="number">100000</span>)</span><br><span class="line"><span class="comment">#返回：0.08681545429464778</span></span><br><span class="line">s = <span class="string">"if hasattr(str, '__bool__'): pass"</span></span><br><span class="line">timeit.timeit(stmt=s, number=<span class="number">100000</span>)</span><br><span class="line"><span class="comment">#返回：0.07468051249376018</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># attribute is present</span></span><br><span class="line">s = <span class="string">'''\</span><br><span class="line">try:</span><br><span class="line">    int.__bool__</span><br><span class="line">except AttributeError:</span><br><span class="line">    pass</span><br><span class="line">'''</span></span><br><span class="line">timeit.timeit(stmt=s, number=<span class="number">100000</span>)</span><br><span class="line"><span class="comment">#返回：0.013321422002690042</span></span><br><span class="line">s = <span class="string">"if hasattr(int, '__bool__'): pass"</span></span><br><span class="line">timeit.timeit(stmt=s, number=<span class="number">100000</span>)</span><br><span class="line"><span class="comment">#返回：0.017978254158009577</span></span><br></pre></td></tr></table></figure></p>
+<p><strong>为了使timeit模块可以测量我们自己的函数，可以在setup参数中通过import语句导入：</strong><br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">test</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="string">"""Stupid test function"""</span></span><br><span class="line">    L = [i <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">100</span>)]</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    <span class="keyword">import</span> timeit</span><br><span class="line">    print(timeit.timeit(<span class="string">"test()"</span>, setup=<span class="string">"from __main__ import test"</span>))</span><br></pre></td></tr></table></figure></p>
+<p>（报错，暂不知道原理和原因）</p>
+<h3 id="附上timeit源码："><a href="#附上timeit源码：" class="headerlink" title="附上timeit源码："></a>附上timeit源码：</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br><span class="line">270</span><br><span class="line">271</span><br><span class="line">272</span><br><span class="line">273</span><br><span class="line">274</span><br><span class="line">275</span><br><span class="line">276</span><br><span class="line">277</span><br><span class="line">278</span><br><span class="line">279</span><br><span class="line">280</span><br><span class="line">281</span><br><span class="line">282</span><br><span class="line">283</span><br><span class="line">284</span><br><span class="line">285</span><br><span class="line">286</span><br><span class="line">287</span><br><span class="line">288</span><br><span class="line">289</span><br><span class="line">290</span><br><span class="line">291</span><br><span class="line">292</span><br><span class="line">293</span><br><span class="line">294</span><br><span class="line">295</span><br><span class="line">296</span><br><span class="line">297</span><br><span class="line">298</span><br><span class="line">299</span><br><span class="line">300</span><br><span class="line">301</span><br><span class="line">302</span><br><span class="line">303</span><br><span class="line">304</span><br><span class="line">305</span><br><span class="line">306</span><br><span class="line">307</span><br><span class="line">308</span><br><span class="line">309</span><br><span class="line">310</span><br><span class="line">311</span><br><span class="line">312</span><br><span class="line">313</span><br><span class="line">314</span><br><span class="line">315</span><br><span class="line">316</span><br><span class="line">317</span><br><span class="line">318</span><br><span class="line">319</span><br><span class="line">320</span><br><span class="line">321</span><br><span class="line">322</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#! /usr/bin/env python3</span></span><br><span class="line"></span><br><span class="line"><span class="string">"""Tool for measuring execution time of small code snippets.</span><br><span class="line"></span><br><span class="line">This module avoids a number of common traps for measuring execution</span><br><span class="line">times.  See also Tim Peters' introduction to the Algorithms chapter in</span><br><span class="line">the Python Cookbook, published by O'Reilly.</span><br><span class="line"></span><br><span class="line">Library usage: see the Timer class.</span><br><span class="line"></span><br><span class="line">Command line usage:</span><br><span class="line">    python timeit.py [-n N] [-r N] [-s S] [-t] [-c] [-p] [-h] [--] [statement]</span><br><span class="line"></span><br><span class="line">Options:</span><br><span class="line">  -n/--number N: how many times to execute 'statement' (default: see below)</span><br><span class="line">  -r/--repeat N: how many times to repeat the timer (default 3)</span><br><span class="line">  -s/--setup S: statement to be executed once initially (default 'pass')</span><br><span class="line">  -p/--process: use time.process_time() (default is time.perf_counter())</span><br><span class="line">  -t/--time: use time.time() (deprecated)</span><br><span class="line">  -c/--clock: use time.clock() (deprecated)</span><br><span class="line">  -v/--verbose: print raw timing results; repeat for more digits precision</span><br><span class="line">  -h/--help: print this usage message and exit</span><br><span class="line">  --: separate options from statement, use when statement starts with -</span><br><span class="line">  statement: statement to be timed (default 'pass')</span><br><span class="line"></span><br><span class="line">A multi-line statement may be given by specifying each line as a</span><br><span class="line">separate argument; indented lines are possible by enclosing an</span><br><span class="line">argument in quotes and using leading spaces.  Multiple -s options are</span><br><span class="line">treated similarly.</span><br><span class="line"></span><br><span class="line">If -n is not given, a suitable number of loops is calculated by trying</span><br><span class="line">successive powers of 10 until the total time is at least 0.2 seconds.</span><br><span class="line"></span><br><span class="line">Note: there is a certain baseline overhead associated with executing a</span><br><span class="line">pass statement.  It differs between versions.  The code here doesn't try</span><br><span class="line">to hide it, but you should be aware of it.  The baseline overhead can be</span><br><span class="line">measured by invoking the program without arguments.</span><br><span class="line"></span><br><span class="line">Classes:</span><br><span class="line"></span><br><span class="line">    Timer</span><br><span class="line"></span><br><span class="line">Functions:</span><br><span class="line"></span><br><span class="line">    timeit(string, string) -&gt; float</span><br><span class="line">    repeat(string, string) -&gt; list</span><br><span class="line">    default_timer() -&gt; float</span><br><span class="line"></span><br><span class="line">"""</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> gc</span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">import</span> itertools</span><br><span class="line"></span><br><span class="line">__all__ = [<span class="string">"Timer"</span>, <span class="string">"timeit"</span>, <span class="string">"repeat"</span>, <span class="string">"default_timer"</span>]</span><br><span class="line"></span><br><span class="line">dummy_src_name = <span class="string">"&lt;timeit-src&gt;"</span></span><br><span class="line">default_number = <span class="number">1000000</span></span><br><span class="line">default_repeat = <span class="number">3</span></span><br><span class="line">default_timer = time.perf_counter</span><br><span class="line"></span><br><span class="line"><span class="comment"># Don't change the indentation of the template; the reindent() calls</span></span><br><span class="line"><span class="comment"># in Timer.__init__() depend on setup being indented 4 spaces and stmt</span></span><br><span class="line"><span class="comment"># being indented 8 spaces.</span></span><br><span class="line">template = <span class="string">"""</span><br><span class="line">def inner(_it, _timer):</span><br><span class="line">    &#123;setup&#125;</span><br><span class="line">    _t0 = _timer()</span><br><span class="line">    for _i in _it:</span><br><span class="line">        &#123;stmt&#125;</span><br><span class="line">    _t1 = _timer()</span><br><span class="line">    return _t1 - _t0</span><br><span class="line">"""</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">reindent</span><span class="params">(src, indent)</span>:</span></span><br><span class="line">    <span class="string">"""Helper to reindent a multi-line statement."""</span></span><br><span class="line">    <span class="keyword">return</span> src.replace(<span class="string">"\n"</span>, <span class="string">"\n"</span> + <span class="string">" "</span>*indent)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">_template_func</span><span class="params">(setup, func)</span>:</span></span><br><span class="line">    <span class="string">"""Create a timer function. Used if the "statement" is a callable."""</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">inner</span><span class="params">(_it, _timer, _func=func)</span>:</span></span><br><span class="line">        setup()</span><br><span class="line">        _t0 = _timer()</span><br><span class="line">        <span class="keyword">for</span> _i <span class="keyword">in</span> _it:</span><br><span class="line">            _func()</span><br><span class="line">        _t1 = _timer()</span><br><span class="line">        <span class="keyword">return</span> _t1 - _t0</span><br><span class="line">    <span class="keyword">return</span> inner</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Timer</span>:</span></span><br><span class="line">    <span class="string">"""Class for timing execution speed of small code snippets.</span><br><span class="line"></span><br><span class="line">    The constructor takes a statement to be timed, an additional</span><br><span class="line">    statement used for setup, and a timer function.  Both statements</span><br><span class="line">    default to 'pass'; the timer function is platform-dependent (see</span><br><span class="line">    module doc string).</span><br><span class="line"></span><br><span class="line">    To measure the execution time of the first statement, use the</span><br><span class="line">    timeit() method.  The repeat() method is a convenience to call</span><br><span class="line">    timeit() multiple times and return a list of results.</span><br><span class="line"></span><br><span class="line">    The statements may contain newlines, as long as they don't contain</span><br><span class="line">    multi-line string literals.</span><br><span class="line">    """</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, stmt=<span class="string">"pass"</span>, setup=<span class="string">"pass"</span>, timer=default_timer)</span>:</span></span><br><span class="line">        <span class="string">"""Constructor.  See class doc string."""</span></span><br><span class="line">        self.timer = timer</span><br><span class="line">        ns = &#123;&#125;</span><br><span class="line">        <span class="keyword">if</span> isinstance(stmt, str):</span><br><span class="line">            stmt = reindent(stmt, <span class="number">8</span>)</span><br><span class="line">            <span class="keyword">if</span> isinstance(setup, str):</span><br><span class="line">                setup = reindent(setup, <span class="number">4</span>)</span><br><span class="line">                src = template.format(stmt=stmt, setup=setup)</span><br><span class="line">            <span class="keyword">elif</span> callable(setup):</span><br><span class="line">                src = template.format(stmt=stmt, setup=<span class="string">'_setup()'</span>)</span><br><span class="line">                ns[<span class="string">'_setup'</span>] = setup</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                <span class="keyword">raise</span> ValueError(<span class="string">"setup is neither a string nor callable"</span>)</span><br><span class="line">            self.src = src <span class="comment"># Save for traceback display</span></span><br><span class="line">            code = compile(src, dummy_src_name, <span class="string">"exec"</span>)</span><br><span class="line">            exec(code, globals(), ns)</span><br><span class="line">            self.inner = ns[<span class="string">"inner"</span>]</span><br><span class="line">        <span class="keyword">elif</span> callable(stmt):</span><br><span class="line">            self.src = <span class="keyword">None</span></span><br><span class="line">            <span class="keyword">if</span> isinstance(setup, str):</span><br><span class="line">                _setup = setup</span><br><span class="line">                <span class="function"><span class="keyword">def</span> <span class="title">setup</span><span class="params">()</span>:</span></span><br><span class="line">                    exec(_setup, globals(), ns)</span><br><span class="line">            <span class="keyword">elif</span> <span class="keyword">not</span> callable(setup):</span><br><span class="line">                <span class="keyword">raise</span> ValueError(<span class="string">"setup is neither a string nor callable"</span>)</span><br><span class="line">            self.inner = _template_func(setup, stmt)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">raise</span> ValueError(<span class="string">"stmt is neither a string nor callable"</span>)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">print_exc</span><span class="params">(self, file=None)</span>:</span></span><br><span class="line">        <span class="string">"""Helper to print a traceback from the timed code.</span><br><span class="line"></span><br><span class="line">        Typical use:</span><br><span class="line"></span><br><span class="line">            t = Timer(...)       # outside the try/except</span><br><span class="line">            try:</span><br><span class="line">                t.timeit(...)    # or t.repeat(...)</span><br><span class="line">            except:</span><br><span class="line">                t.print_exc()</span><br><span class="line"></span><br><span class="line">        The advantage over the standard traceback is that source lines</span><br><span class="line">        in the compiled template will be displayed.</span><br><span class="line"></span><br><span class="line">        The optional file argument directs where the traceback is</span><br><span class="line">        sent; it defaults to sys.stderr.</span><br><span class="line">        """</span></span><br><span class="line">        <span class="keyword">import</span> linecache, traceback</span><br><span class="line">        <span class="keyword">if</span> self.src <span class="keyword">is</span> <span class="keyword">not</span> <span class="keyword">None</span>:</span><br><span class="line">            linecache.cache[dummy_src_name] = (len(self.src),</span><br><span class="line">                                               <span class="keyword">None</span>,</span><br><span class="line">                                               self.src.split(<span class="string">"\n"</span>),</span><br><span class="line">                                               dummy_src_name)</span><br><span class="line">        <span class="comment"># else the source is already stored somewhere else</span></span><br><span class="line"></span><br><span class="line">        traceback.print_exc(file=file)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">timeit</span><span class="params">(self, number=default_number)</span>:</span></span><br><span class="line">        <span class="string">"""Time 'number' executions of the main statement.</span><br><span class="line"></span><br><span class="line">        To be precise, this executes the setup statement once, and</span><br><span class="line">        then returns the time it takes to execute the main statement</span><br><span class="line">        a number of times, as a float measured in seconds.  The</span><br><span class="line">        argument is the number of times through the loop, defaulting</span><br><span class="line">        to one million.  The main statement, the setup statement and</span><br><span class="line">        the timer function to be used are passed to the constructor.</span><br><span class="line">        """</span></span><br><span class="line">        it = itertools.repeat(<span class="keyword">None</span>, number)</span><br><span class="line">        gcold = gc.isenabled()</span><br><span class="line">        gc.disable()</span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            timing = self.inner(it, self.timer)</span><br><span class="line">        <span class="keyword">finally</span>:</span><br><span class="line">            <span class="keyword">if</span> gcold:</span><br><span class="line">                gc.enable()</span><br><span class="line">        <span class="keyword">return</span> timing</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">repeat</span><span class="params">(self, repeat=default_repeat, number=default_number)</span>:</span></span><br><span class="line">        <span class="string">"""Call timeit() a few times.</span><br><span class="line"></span><br><span class="line">        This is a convenience function that calls the timeit()</span><br><span class="line">        repeatedly, returning a list of results.  The first argument</span><br><span class="line">        specifies how many times to call timeit(), defaulting to 3;</span><br><span class="line">        the second argument specifies the timer argument, defaulting</span><br><span class="line">        to one million.</span><br><span class="line"></span><br><span class="line">        Note: it's tempting to calculate mean and standard deviation</span><br><span class="line">        from the result vector and report these.  However, this is not</span><br><span class="line">        very useful.  In a typical case, the lowest value gives a</span><br><span class="line">        lower bound for how fast your machine can run the given code</span><br><span class="line">        snippet; higher values in the result vector are typically not</span><br><span class="line">        caused by variability in Python's speed, but by other</span><br><span class="line">        processes interfering with your timing accuracy.  So the min()</span><br><span class="line">        of the result is probably the only number you should be</span><br><span class="line">        interested in.  After that, you should look at the entire</span><br><span class="line">        vector and apply common sense rather than statistics.</span><br><span class="line">        """</span></span><br><span class="line">        r = []</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(repeat):</span><br><span class="line">            t = self.timeit(number)</span><br><span class="line">            r.append(t)</span><br><span class="line">        <span class="keyword">return</span> r</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">timeit</span><span class="params">(stmt=<span class="string">"pass"</span>, setup=<span class="string">"pass"</span>, timer=default_timer,</span><br><span class="line">           number=default_number)</span>:</span></span><br><span class="line">    <span class="string">"""Convenience function to create Timer object and call timeit method."""</span></span><br><span class="line">    <span class="keyword">return</span> Timer(stmt, setup, timer).timeit(number)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">repeat</span><span class="params">(stmt=<span class="string">"pass"</span>, setup=<span class="string">"pass"</span>, timer=default_timer,</span><br><span class="line">           repeat=default_repeat, number=default_number)</span>:</span></span><br><span class="line">    <span class="string">"""Convenience function to create Timer object and call repeat method."""</span></span><br><span class="line">    <span class="keyword">return</span> Timer(stmt, setup, timer).repeat(repeat, number)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">(args=None, *, _wrap_timer=None)</span>:</span></span><br><span class="line">    <span class="string">"""Main program, used when run as a script.</span><br><span class="line"></span><br><span class="line">    The optional 'args' argument specifies the command line to be parsed,</span><br><span class="line">    defaulting to sys.argv[1:].</span><br><span class="line"></span><br><span class="line">    The return value is an exit code to be passed to sys.exit(); it</span><br><span class="line">    may be None to indicate success.</span><br><span class="line"></span><br><span class="line">    When an exception happens during timing, a traceback is printed to</span><br><span class="line">    stderr and the return value is 1.  Exceptions at other times</span><br><span class="line">    (including the template compilation) are not caught.</span><br><span class="line"></span><br><span class="line">    '_wrap_timer' is an internal interface used for unit testing.  If it</span><br><span class="line">    is not None, it must be a callable that accepts a timer function</span><br><span class="line">    and returns another timer function (used for unit testing).</span><br><span class="line">    """</span></span><br><span class="line">    <span class="keyword">if</span> args <span class="keyword">is</span> <span class="keyword">None</span>:</span><br><span class="line">        args = sys.argv[<span class="number">1</span>:]</span><br><span class="line">    <span class="keyword">import</span> getopt</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        opts, args = getopt.getopt(args, <span class="string">"n:s:r:tcpvh"</span>,</span><br><span class="line">                                   [<span class="string">"number="</span>, <span class="string">"setup="</span>, <span class="string">"repeat="</span>,</span><br><span class="line">                                    <span class="string">"time"</span>, <span class="string">"clock"</span>, <span class="string">"process"</span>,</span><br><span class="line">                                    <span class="string">"verbose"</span>, <span class="string">"help"</span>])</span><br><span class="line">    <span class="keyword">except</span> getopt.error <span class="keyword">as</span> err:</span><br><span class="line">        print(err)</span><br><span class="line">        print(<span class="string">"use -h/--help for command line help"</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="number">2</span></span><br><span class="line">    timer = default_timer</span><br><span class="line">    stmt = <span class="string">"\n"</span>.join(args) <span class="keyword">or</span> <span class="string">"pass"</span></span><br><span class="line">    number = <span class="number">0</span> <span class="comment"># auto-determine</span></span><br><span class="line">    setup = []</span><br><span class="line">    repeat = default_repeat</span><br><span class="line">    verbose = <span class="number">0</span></span><br><span class="line">    precision = <span class="number">3</span></span><br><span class="line">    <span class="keyword">for</span> o, a <span class="keyword">in</span> opts:</span><br><span class="line">        <span class="keyword">if</span> o <span class="keyword">in</span> (<span class="string">"-n"</span>, <span class="string">"--number"</span>):</span><br><span class="line">            number = int(a)</span><br><span class="line">        <span class="keyword">if</span> o <span class="keyword">in</span> (<span class="string">"-s"</span>, <span class="string">"--setup"</span>):</span><br><span class="line">            setup.append(a)</span><br><span class="line">        <span class="keyword">if</span> o <span class="keyword">in</span> (<span class="string">"-r"</span>, <span class="string">"--repeat"</span>):</span><br><span class="line">            repeat = int(a)</span><br><span class="line">            <span class="keyword">if</span> repeat &lt;= <span class="number">0</span>:</span><br><span class="line">                repeat = <span class="number">1</span></span><br><span class="line">        <span class="keyword">if</span> o <span class="keyword">in</span> (<span class="string">"-t"</span>, <span class="string">"--time"</span>):</span><br><span class="line">            timer = time.time</span><br><span class="line">        <span class="keyword">if</span> o <span class="keyword">in</span> (<span class="string">"-c"</span>, <span class="string">"--clock"</span>):</span><br><span class="line">            timer = time.clock</span><br><span class="line">        <span class="keyword">if</span> o <span class="keyword">in</span> (<span class="string">"-p"</span>, <span class="string">"--process"</span>):</span><br><span class="line">            timer = time.process_time</span><br><span class="line">        <span class="keyword">if</span> o <span class="keyword">in</span> (<span class="string">"-v"</span>, <span class="string">"--verbose"</span>):</span><br><span class="line">            <span class="keyword">if</span> verbose:</span><br><span class="line">                precision += <span class="number">1</span></span><br><span class="line">            verbose += <span class="number">1</span></span><br><span class="line">        <span class="keyword">if</span> o <span class="keyword">in</span> (<span class="string">"-h"</span>, <span class="string">"--help"</span>):</span><br><span class="line">            print(__doc__, end=<span class="string">' '</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">    setup = <span class="string">"\n"</span>.join(setup) <span class="keyword">or</span> <span class="string">"pass"</span></span><br><span class="line">    <span class="comment"># Include the current directory, so that local imports work (sys.path</span></span><br><span class="line">    <span class="comment"># contains the directory of this script, rather than the current</span></span><br><span class="line">    <span class="comment"># directory)</span></span><br><span class="line">    <span class="keyword">import</span> os</span><br><span class="line">    sys.path.insert(<span class="number">0</span>, os.curdir)</span><br><span class="line">    <span class="keyword">if</span> _wrap_timer <span class="keyword">is</span> <span class="keyword">not</span> <span class="keyword">None</span>:</span><br><span class="line">        timer = _wrap_timer(timer)</span><br><span class="line">    t = Timer(stmt, setup, timer)</span><br><span class="line">    <span class="keyword">if</span> number == <span class="number">0</span>:</span><br><span class="line">        <span class="comment"># determine number so that 0.2 &lt;= total time &lt; 2.0</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>, <span class="number">10</span>):</span><br><span class="line">            number = <span class="number">10</span>**i</span><br><span class="line">            <span class="keyword">try</span>:</span><br><span class="line">                x = t.timeit(number)</span><br><span class="line">            <span class="keyword">except</span>:</span><br><span class="line">                t.print_exc()</span><br><span class="line">                <span class="keyword">return</span> <span class="number">1</span></span><br><span class="line">            <span class="keyword">if</span> verbose:</span><br><span class="line">                print(<span class="string">"%d loops -&gt; %.*g secs"</span> % (number, precision, x))</span><br><span class="line">            <span class="keyword">if</span> x &gt;= <span class="number">0.2</span>:</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        r = t.repeat(repeat, number)</span><br><span class="line">    <span class="keyword">except</span>:</span><br><span class="line">        t.print_exc()</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span></span><br><span class="line">    best = min(r)</span><br><span class="line">    <span class="keyword">if</span> verbose:</span><br><span class="line">        print(<span class="string">"raw times:"</span>, <span class="string">" "</span>.join([<span class="string">"%.*g"</span> % (precision, x) <span class="keyword">for</span> x <span class="keyword">in</span> r]))</span><br><span class="line">    print(<span class="string">"%d loops,"</span> % number, end=<span class="string">' '</span>)</span><br><span class="line">    usec = best * <span class="number">1e6</span> / number</span><br><span class="line">    <span class="keyword">if</span> usec &lt; <span class="number">1000</span>:</span><br><span class="line">        print(<span class="string">"best of %d: %.*g usec per loop"</span> % (repeat, precision, usec))</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        msec = usec / <span class="number">1000</span></span><br><span class="line">        <span class="keyword">if</span> msec &lt; <span class="number">1000</span>:</span><br><span class="line">            print(<span class="string">"best of %d: %.*g msec per loop"</span> % (repeat, precision, msec))</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            sec = msec / <span class="number">1000</span></span><br><span class="line">            print(<span class="string">"best of %d: %.*g sec per loop"</span> % (repeat, precision, sec))</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">None</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">"__main__"</span>:</span><br><span class="line">    sys.exit(main())</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2015/07/Python-9/">Python：timeit模块详解</a></p>
+        <p><span>文章作者:</span><a href="/" title="访问 Lancelot 的个人博客">Lancelot</a></p>
+        <p><span>发布时间:</span>2015年07月01日 - 08时00分</p>
+        <p><span>最后更新:</span>2016年02月21日 - 15时05分</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2015/07/Python-9/" title="Python：timeit模块详解">http://darknight.me/2015/07/Python-9/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://darknight.me/2015/07/Python-9/　　作者: Lancelot" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script src="/js/clipboard.min.js"></script>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" title="中国大陆 (CC BY-NC-SA 3.0 CN)" target = "_blank">"署名-非商用-相同方式共享 3.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+            <div id="article-nav-newer" class="article-nav-title">
+                <a href="/2015/07/Python-8/">
+                    Python：time模块详解
+                </a>
+            </div>
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2015/07/Python-1/">
+                    Python鸭子类型
+                </a>
+            </div>
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#来源：鱼C论坛"><span class="toc-number">1.</span> <span class="toc-text">来源：鱼C论坛</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#timeit模块–准确测量小段代码的执行时间"><span class="toc-number">1.1.</span> <span class="toc-text">timeit模块–准确测量小段代码的执行时间</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#timeit模块"><span class="toc-number">1.1.1.</span> <span class="toc-text">timeit模块</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#命令行界面"><span class="toc-number">1.1.2.</span> <span class="toc-text">命令行界面</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#示例："><span class="toc-number">1.1.3.</span> <span class="toc-text">示例：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#附上timeit源码："><span class="toc-number">1.2.</span> <span class="toc-text">附上timeit源码：</span></a></li></ol></li></ol>
+</div>
+<style>
+    .left-col .switch-btn {
+        display: none;
+    }
+    .left-col .switch-area {
+        display: none;
+    }
+</style>
+
+<input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js" type="text/javascript"></script>
+<script>
+    var valueHide = "隐藏目录";
+    var valueShow = "显示目录";
+
+    if ($(".left-col").is(":hidden")) {
+        $("#tocButton").attr("value", valueShow);
+    }
+
+    $("#tocButton").click(function() {
+        if ($("#toc").is(":hidden")) {
+            $("#tocButton").attr("value", valueHide);
+            $("#toc").slideDown(320);
+            $(".switch-btn, .switch-area").fadeOut(300);
+        }
+        else {
+            $("#tocButton").attr("value", valueShow);
+            $("#toc").slideUp(350);
+            $(".switch-btn, .switch-area").fadeIn(500);
+        }
+    })
+
+    if ($(".toc").length < 1) {
+        $("#toc, #tocButton").hide();
+        $(".switch-btn, .switch-area").show();
+    }
+</script>
+
+
+
+
+    <div class="share">
+    <div class="bdsharebuttonbox">
+    <a href="#" class="bds_more" data-cmd="more"></a>
+    <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a href="#" class="bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+    <a href="#" class="bds_copy" data-cmd="copy" title="复制网址"></a>
+    <a href="#" class="bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+    <a href="#" class="bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+    </div>
+    <script>
+        window._bd_share_config={
+            "common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+    </script>
+</div>
+
+
+
+    
+      <div class="duoshuo" id="comments">
+    <!-- 多说评论框 start -->
+    <div class="ds-thread" data-thread-key="2015/07/Python-9/" data-title="Python：timeit模块详解" data-url="http://darknight.me/2015/07/Python-9/"></div>
+    <!-- 多说评论框 end -->
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+    <script type="text/javascript">
+    var duoshuoQuery = {short_name:"darknight"};
+    (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0] 
+         || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+    </script>
+    <!-- 多说公共JS代码 end -->
+</div>
+
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2015/07/Python-8/" title="上一篇: Python：time模块详解">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2015/07/Python-1/" title="下一篇: Python鸭子类型">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016/02/JavaScript-4/">JavaScript中的那些方法：字符串</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/JavaScript-3/">JavaScript中的那些方法：数组</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/JavaScript-2/">JavaScript中的那些方法：计算</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/JavaScript-1/">JavaScript中的那些方法：函数</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/Skills-1/">那些你应该知道的编程技巧</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/09/Spring-1/">Spring服务器设置文件上传限制</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/09/PythonStudy-42/">Python学习（42）：爬虫：Scrapy</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/08/PythonStudy-41/">Python学习（41）：爬虫：异常处理</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/08/PythonStudy-40/">Python学习（40）：正则表达式2</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/08/PythonStudy-39/">Python学习（39）：正则表达式</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/08/PythonStudy-38/">Python学习（38）：爬虫：隐藏</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/08/PythonStudy-37/">Python学习（37）：爬虫：实战</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/08/PythonStudy-36/">Python学习（36）：爬虫：基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/08/PythonStudy-35/">Python学习（35）：模块学习：像极客一样思考</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/08/PythonStudy-34/">Python学习（34）：模块：\__name__=='\__main__'、搜索路径和包</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/08/PythonStudy-33/">Python学习（33）：模块</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/08/PythonStudy-32/">Python学习（32）：生成器</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/08/Python-7/">Python3正则表达式特殊符号及用法</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/08/Python-5/">Python中集合的内建方法总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/08/Python-4/">Python中的HTTP状态码</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/07/PythonStudy-30/">Python学习（30）：魔法方法：定制序列</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/07/PythonStudy-31/">Python学习（31）：魔法方法：迭代器</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/07/PythonStudy-29/">Python学习（29）：魔法方法：描述符（property的原理）</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/07/PythonStudy-28/">Python学习（28）：魔法方法：属性访问</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/07/PythonStudy-27/">Python学习（27）：魔法方法：一个计时器的定制</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/07/PythonStudy-26/">Python学习（26）：魔法方法：算术运算</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/07/PythonStudy-24/">Python学习（24）：类与对象BIF</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/07/PythonStudy-25/">Python学习（25）：魔法方法：构造和析构</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/07/PythonStudy-23/">Python学习（23）：类与对象拾遗</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/07/PythonStudy-22/">Python学习（22）：继承</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/07/PythonStudy-21/">Python学习（21）：类与对象</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/07/PythonStudy-20/">Python学习（20）：EasyGui入门</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/07/PythonStudy-19/">Python学习（19）：else语句&with语句</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/07/PythonStudy-18/">Python学习（18）：异常处理</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/07/PythonStudy-17/">Python学习（17）：永久存储（pickle模块）</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/07/PythonStudy-16/">Python学习（16）：模块&文件系统</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/07/Python-3/">Python魔法方法详解</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/07/Python-6/">Python编码问题的解决方案总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/07/Python-8/">Python：time模块详解</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/07/Python-9/">Python：timeit模块详解</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/07/Python-1/">Python鸭子类型</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/07/Python-2/">Python标准异常</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/07/PythonStudy-15/">Python学习（15）：文件</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/06/PythonStudy-14/">Python学习（14）：集合</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/06/PythonStudy-13/">Python学习（13）：字典</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/06/PythonStudy-12/">Python学习（12）：递归</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/06/PythonStudy-11/">Python学习（11）：lambda表达式、filter和map</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/06/PythonStudy-10/">Python学习（10）：内嵌函数和闭包</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/06/PythonStudy-9/">Python学习（9）：函数作用域</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/06/PythonStudy-8/">Python学习（8）：函数基础，函数文档及灵活的参数列表</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/06/PythonStudy-7/">Python学习（7）：序列</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/06/PythonStudy-6/">Python学习（6）：字符串格式化&格式化符号</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/06/PythonStudy-5/">Python学习（5）：元组&字符串内置函数</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/06/PythonStudy-4/">Python学习（4）：列表</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/06/PythonStudy-3/">Python学习（3）：常用操作符&分支和循环</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/06/PythonStudy-2/">Python学习（2）：Python中的数据类型</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/06/PythonStudy-1/">Python学习（1）：Python入门</a></li></ul>
+    <script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+    <script>
+        $(".post-list").addClass("toc-article");
+        $(".post-list-item a").attr("target","_blank");
+        $("#post-nav-button > a:nth-child(2)").click(function() {
+            $(".fa-bars, .fa-times").toggle();
+            $(".post-list").toggle(300);
+            if ($(".toc").length > 0) {
+                $("#toc, #tocButton").toggle(200, function() {
+                    if ($(".switch-area").is(":visible")) {
+                        $("#toc, .switch-btn, .switch-area").toggle();
+                        $("#tocButton").attr("value", valueHide);
+                        }
+                    })
+            }
+            else {
+                $(".switch-btn, .switch-area").fadeToggle(300);
+            }
+        })
+    </script>
+
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                &copy; 2016 Lancelot
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的静态博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减双栏 Hexo 博客主题">Yelee</a> by MOxFIVE
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" >本站到访数: 
+                            <span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>, </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit">本页阅读量: 
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+    </div>
+    
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js" type="text/javascript"></script>
+<script src="/js/main.js" type="text/javascript"></script>
+
+    <script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 5;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+
+<script>
+    $(document).ready(function() {
+        if ($("#comments").length < 1) {
+            $("#scroll > a:nth-child(2)").hide();
+        };
+    })
+</script>
+
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+</body>
+</html>

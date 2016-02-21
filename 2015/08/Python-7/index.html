@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Python3正则表达式特殊符号及用法 | DarKnight</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="本文来源：鱼C论坛正则表达式的强大之处在于特殊符号的应用，特殊符号定义了字符集合、子组匹配、模式重复次数。正式这些特殊符号使得一个正则表达式可以匹配字符串集合，而不只是一个字符串。
+注1：为了便于理解，难点的地方均用加粗字体标明注2：Python3如何优雅地使用正则表达式（一）Python3如何优雅地使用正则表达式（二）Python3如何优雅地使用正则表达式（三）Python3如何优雅地使用正则表">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python3正则表达式特殊符号及用法">
+<meta property="og:url" content="http://darknight.me/2015/08/Python-7/index.html">
+<meta property="og:site_name" content="DarKnight">
+<meta property="og:description" content="本文来源：鱼C论坛正则表达式的强大之处在于特殊符号的应用，特殊符号定义了字符集合、子组匹配、模式重复次数。正式这些特殊符号使得一个正则表达式可以匹配字符串集合，而不只是一个字符串。
+注1：为了便于理解，难点的地方均用加粗字体标明注2：Python3如何优雅地使用正则表达式（一）Python3如何优雅地使用正则表达式（二）Python3如何优雅地使用正则表达式（三）Python3如何优雅地使用正则表">
+<meta property="og:updated_time" content="2016-02-21T07:01:33.052Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Python3正则表达式特殊符号及用法">
+<meta name="twitter:description" content="本文来源：鱼C论坛正则表达式的强大之处在于特殊符号的应用，特殊符号定义了字符集合、子组匹配、模式重复次数。正式这些特殊符号使得一个正则表达式可以匹配字符串集合，而不只是一个字符串。
+注1：为了便于理解，难点的地方均用加粗字体标明注2：Python3如何优雅地使用正则表达式（一）Python3如何优雅地使用正则表达式（二）Python3如何优雅地使用正则表达式（三）Python3如何优雅地使用正则表">
+  
+    <link rel="alternative" href="/atom.xml" title="DarKnight" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+      <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css" type="text/css">
+  
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  
+  
+      <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  
+  <script>
+      var yiliaConfig = {
+          fancybox: true,
+          animate: true,
+          isHome: false,
+          isPost: true,
+          isArchive: false,
+          isTag: false,
+          isCategory: false,
+          open_in_new: false
+      }
+  </script>
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            
+            <img lazy-src="/img/photo.png" class="js-avatar">
+            
+        </a>
+
+        <hgroup>
+          <h1 class="header-author"><a href="/">Lancelot</a></h1>
+        </hgroup>
+
+        
+        <p class="header-subtitle">拖延癌治疗阶段</p>
+        
+                
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <li id="Email"><a class="Email" target="_blank" href="mailto:darknight4lancelot@gmail.com" title="Email"></a></li>
+                            
+                                <li id="新浪微博"><a class="新浪微博" target="_blank" href="http://weibo.com/u/2556148711" title="新浪微博"></a></li>
+                            
+                                <li id="GitHub"><a class="GitHub" target="_blank" href="https://github.com/wanghaoxyq" title="GitHub"></a></li>
+                            
+                                <li id="网易云音乐"><a class="网易云音乐" target="_blank" href="http://music.163.com/#/user/home?id=42137986" title="网易云音乐"></a></li>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/JavaScript/" style="font-size: 14px;">JavaScript</a> <a href="/tags/Python/" style="font-size: 16px;">Python</a> <a href="/tags/Python学习笔记/" style="font-size: 18px;">Python学习笔记</a> <a href="/tags/Spring/" style="font-size: 10px;">Spring</a> <a href="/tags/fishc-com/" style="font-size: 20px;">fishc.com</a> <a href="/tags/代码编写技巧/" style="font-size: 10px;">代码编写技巧</a> <a href="/tags/正则表达式/" style="font-size: 12px;">正则表达式</a>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="https://hexo.io">Hexo</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="https://pages.github.com/">GitHub</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://moxfive.xyz/">MOxFIVE</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">生命在于折腾</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">Lancelot</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                
+                    <img lazy-src="/img/photo.png" class="js-avatar">
+                
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">Lancelot</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">拖延癌治疗阶段</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <li id="Email"><a class="Email" target="_blank" href="mailto:darknight4lancelot@gmail.com" title="Email"></a></li>
+                            
+                                <li id="新浪微博"><a class="新浪微博" target="_blank" href="http://weibo.com/u/2556148711" title="新浪微博"></a></li>
+                            
+                                <li id="GitHub"><a class="GitHub" target="_blank" href="https://github.com/wanghaoxyq" title="GitHub"></a></li>
+                            
+                                <li id="网易云音乐"><a class="网易云音乐" target="_blank" href="http://music.163.com/#/user/home?id=42137986" title="网易云音乐"></a></li>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+</nav>
+      <div class="body-wrap"><article id="post-Python-7" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/08/Python-7/" class="article-date">
+      <time datetime="2015-08-01T00:00:00.000Z" itemprop="datePublished">2015-08-01</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Python3正则表达式特殊符号及用法
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/">Python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/fishc-com/">fishc.com</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/正则表达式/">正则表达式</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h2 id="本文来源：鱼C论坛"><a href="#本文来源：鱼C论坛" class="headerlink" title="本文来源：鱼C论坛"></a>本文来源：<a href="http://bbs.fishc.com/forum.php?mod=viewthread&amp;tid=57691&amp;extra=page%3D1%26filter%3Dtypeid%26typeid%3D403" target="_blank" rel="external">鱼C论坛</a></h2><p>正则表达式的强大之处在于特殊符号的应用，特殊符号定义了字符集合、子组匹配、模式重复次数。正式这些特殊符号使得一个正则表达式可以匹配字符串集合，而不只是一个字符串。</p>
+<p>注1：为了便于理解，难点的地方均用加粗字体标明<br>注2：<br><a href="http://bbs.fishc.com/thread-57073-1-1.html" target="_blank" rel="external">Python3如何优雅地使用正则表达式（一）</a><br><a href="http://bbs.fishc.com/thread-57188-1-1.html" target="_blank" rel="external">Python3如何优雅地使用正则表达式（二）</a><br><a href="http://bbs.fishc.com/thread-57207-1-1.html" target="_blank" rel="external">Python3如何优雅地使用正则表达式（三）</a><br><a href="http://bbs.fishc.com/thread-57271-1-1.html" target="_blank" rel="external">Python3如何优雅地使用正则表达式（四）</a><br><a href="http://bbs.fishc.com/thread-57317-1-1.html" target="_blank" rel="external">Python3如何优雅地使用正则表达式（五）</a><br><a href="http://bbs.fishc.com/thread-57362-1-1.html" target="_blank" rel="external">Python3如何优雅地使用正则表达式（六）</a><br><a href="http://bbs.fishc.com/thread-57438-1-1.html" target="_blank" rel="external">Python3如何优雅地使用正则表达式（七）</a></p>
+<a id="more"></a>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">字符</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><code>.</code></td>
+<td>表示匹配除了换行符外的任何字符</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td>注：通过设置re.DOTALL标志可以使<code>.</code>匹配任何字符（包括换行符）</td>
+</tr>
+<tr>
+<td style="text-align:center">`\</td>
+<td>`</td>
+<td>`A\</td>
+<td>B`，表示匹配正则表达式A或者B</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>^</code></td>
+<td>1.（脱字符）匹配输入字符串的开始位置</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td>2.如果设置了re.MULTLINE标志，<code>^</code>也匹配换行符之后的位置</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>$</code></td>
+<td>1.匹配输入字符串的结束位置</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td>2.如果设置了re.MULTLINE标志，<code>$</code>也匹配换行符之前的位置</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>\</code></td>
+<td>1.将一个普通字符变成特殊字符，例如<code>\d</code>表示匹配所有十进制数字</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td>2.解除元字符的特殊功能，例如<code>\.</code>表示匹配点号本身</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td>3.引用序号对应的子组所匹配的字符串</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td>4.详见下方列举</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>[...]</code></td>
+<td>字符类，匹配所包含的任意一个字符</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td>注1：连字符<code>-</code>如果出现在字符串中间表示字符范围描述；如果出现在首位则仅作为普通字符</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td>注2：特殊字符仅有反斜线<code>\</code>保持特殊含义，用于转义字符。其它特殊字符如<code>*</code>、<code>+</code>、<code>?</code>等均作为普通字符匹配</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td>注3：脱字符<code>^</code>如果出现在首位则表示匹配不包含其中的任意字符；如果<code>^</code>出现在字符串中间就仅作为普通字符匹配</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>{M,N}</code></td>
+<td>M和N均为非负整数，其中M &lt;= N,表示前边的RE匹配M~N次</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td>注1：{M,}表示至少匹配M次</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td>注2：{,N}等价于{0,N}</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td>注3：{N}表示需要匹配N次</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>*</code></td>
+<td>匹配前面的子表达式零次或多次，等价于{0,}</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>+</code></td>
+<td>匹配前面的子表达式一次或多次，等价于{1,}</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>?</code></td>
+<td>匹配前面的子表达式零次或一次，等价于{0,1}</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>*?,+?,??</code></td>
+<td>默认情况下，<code>*</code>、<code>+</code>和<code>?</code>的匹配模式是贪婪模式（即会尽可能多地匹配复合规则的字符串）；<code>*?</code>、<code>+?</code>和<code>??</code>表示启用对应的非贪婪模式</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td><strong>举个栗子：对于字符串’FishCCC’，正则表达式<code>FishC+</code>会匹配整个字符串，而<code>FishC+?</code>则匹配’FishC’</strong></td>
+</tr>
+<tr>
+<td style="text-align:center"><code>{M,N}?</code></td>
+<td>同上，启用非贪婪模式，即只匹配M次</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>(...)</code></td>
+<td>匹配圆括号中的正则表达式，或者指定一个子组的开始和结束位置</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td>注：子组的内容可以在匹配之后被<code>\数字</code>再次引用</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td>举个栗子：<code>(\w+) \1</code>可以匹配字符串’FishC FishC.com’中的’FishC FishC’（注意有空格）</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>?...</code></td>
+<td><code>(?</code>开头的表示为正则表达式的扩展语法（下面这些是Python支持的所有扩展语法）</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>(?aiLmsux)</code></td>
+<td>1.<code>(?</code>后可以紧跟着’a’,’i’,’L’,’m’,’s’,’u’,’x’中的一个或多个字符，只能在正则表达式的开头使用</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td>2.每一个字符对用一种匹配标志：re-A（只匹配ASCII字符），re-l（忽略大小写），re-L（区域设置），re-M（多行模式），re-X（详细表达式），包含这些字符将会影响整个正则表达式的规则</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td>3.当你不想通过re.compile()设置正则表达式标志，这种方法就非常有用了</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td>注意，由于<code>(?x)</code>决定正则表达式如何被解析，所以它应该总是被放在最前面（最多允许前面有空白符）。如果<code>(?x)</code>的前面是非空白符，那么<code>(?x)</code>就发挥不了作用了</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>(?:...)</code></td>
+<td>非捕获组，即该子组匹配的字符串无法从后面获取</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>(?P&lt;name&gt;...)</code></td>
+<td>命名组，通过组的名字（name）即可访问到子组匹配的字符串</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>(?P=name)</code></td>
+<td>反向引用一个命名组，它匹配指定命名组匹配的任何内容</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>(?#...)</code></td>
+<td>注释，括号中的内容将被省略</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>(?=...)</code></td>
+<td>前向肯定断言。如果当前包含的正则表达式（这里以…表示）在当前位置成功匹配，则代表成功，否则失败。一旦该部分正则表达式被匹配引擎尝试过，就不会继续进行匹配了；剩下的模式在此断言开始的地方继续尝试</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td><strong>举个栗子：<code>love(?=FishC)</code>只匹配后面紧跟着’FishC’的字符串’love’</strong></td>
+</tr>
+<tr>
+<td style="text-align:center"><code>(?!...)</code></td>
+<td>前向否定断言。这跟前向肯定断言相反（不匹配则表示成功，匹配表示失败）</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td><strong>举个栗子：<code>FishC(?!.com)</code>只匹配后面不是’.com’的字符串’FishC’</strong></td>
+</tr>
+<tr>
+<td style="text-align:center"><code>(?&lt;=...)</code></td>
+<td>后向肯定断言。跟前向肯定断言一样，只是方向相反。</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td><strong>举个栗子：<code>(?&lt;=love)FishC</code>只匹配前面紧跟着’love’的字符串’FishC’</strong></td>
+</tr>
+<tr>
+<td style="text-align:center"><code>(?&lt;!...)</code></td>
+<td>后向否定断言。这前向否定断言一样，只是方向相反。</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td><strong>举个栗子：<code>(?&lt;!FishC)\.com</code>只匹配前面不是’FishC’的字符串’.com’</strong></td>
+</tr>
+<tr>
+<td style="text-align:center">(?(id/name)yes-pattern\</td>
+<td>no-pattern)</td>
+<td>1.如果子组的序号或名字存在的话，则尝试yes-pattern匹配模式；否则尝试no-pattern匹配模式</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td>2.no-pattern是可选的</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td>**举个栗子：`(<a href="&#109;&#97;&#x69;&#x6c;&#x74;&#111;&#x3a;&#x29;&#63;&#x28;&#92;&#119;&#43;&#64;&#92;&#119;&#43;&#x28;&#63;&#x3a;&#92;&#x2e;&#92;&#x77;&#x2b;&#x29;&#43;&#41;&#x28;&#63;&#40;&#49;&#x29;">&#x29;&#63;&#x28;&#92;&#119;&#43;&#64;&#92;&#119;&#43;&#x28;&#63;&#x3a;&#92;&#x2e;&#92;&#x77;&#x2b;&#x29;&#43;&#41;&#x28;&#63;&#40;&#49;&#x29;</a>\</td>
+<td>$)<code>是一个匹配邮件格式的正则表达式，可以匹配</code><a href="&#109;&#97;&#x69;&#108;&#116;&#111;&#x3a;&#x75;&#x73;&#101;&#114;&#64;&#102;&#x69;&#115;&#104;&#99;&#46;&#x63;&#x6f;&#x6d;">&#x75;&#x73;&#101;&#114;&#64;&#102;&#x69;&#115;&#104;&#99;&#46;&#x63;&#x6f;&#x6d;</a><code>和</code>user@fishc.com<code>，但是不会匹配</code><a href="&#109;&#97;&#x69;&#108;&#x74;&#x6f;&#x3a;&#x75;&#x73;&#101;&#114;&#64;&#x66;&#x69;&#x73;&#104;&#99;&#46;&#99;&#111;&#x6d;&#x60;&#25110;&#x60;&#x75;&#115;&#101;&#114;&#x40;&#x66;&#x69;&#115;&#104;&#99;&#46;&#x63;&#111;&#x6d;">&#x75;&#x73;&#101;&#114;&#64;&#x66;&#x69;&#x73;&#104;&#99;&#46;&#99;&#111;&#x6d;&#x60;&#25110;&#x60;&#x75;&#115;&#101;&#114;&#x40;&#x66;&#x69;&#115;&#104;&#99;&#46;&#x63;&#111;&#x6d;</a>`**</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>\</code></td>
+<td>下面列举了由字符<code>\</code>和另一个字符组成的特殊含义。主义<code>\</code>+元字符的组合可以解释元字符的特殊功能</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>\序号</code></td>
+<td>1.引用序号对应的子组所匹配的字符串，子组的序号从1开始计算</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td>2.如果序号是以0开头，或者3个数字的长度，那么不会被用于引用对应的子组，而是用于匹配八进制数所表示的ASCII码值对应的字符</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td><strong>举个栗子：<code>(.+) \1</code>会匹配’FishC Fish C’或者’55 55’，但不会匹配’FishCFishC’（注意，因为子组后面还有一个空格）</strong></td>
+</tr>
+<tr>
+<td style="text-align:center"><code>\A</code></td>
+<td>匹配输入字符串的开始位置</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>\Z</code></td>
+<td>匹配输入字符串的结束位置</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>\b</code></td>
+<td>匹配一个单词边界，单词被定义为Unicode的字母数字或下划线字符</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td><strong>举个栗子：<code>\bFishC\b</code>会匹配字符串’love FishC’、’FishC.’或’(FishC)’</strong></td>
+</tr>
+<tr>
+<td style="text-align:center"><code>\B</code></td>
+<td>匹配非单词边界，其实就是与<code>\b</code>相反</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td><strong>举个栗子：<code>py\B</code>会匹配字符串’python’、’py3’或’py2’，但不会匹配’py ‘、’py.’或’py!’</strong></td>
+</tr>
+<tr>
+<td style="text-align:center"><code>\d</code></td>
+<td>1.对于Unicode（str类型）模式：匹配任何一个数字，包括[0-9]和其他数字字符；如果开启了re.ASCII标志，就只匹配[0-9]</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td>2.对于8位（bytes类型）模式：匹配[0-9]中任何一个数字</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>\D</code></td>
+<td>匹配任何非Unicode的数字，其实就是与<code>\d</code>相反；如果开启了re.ASCII标志，则相当于匹配[^0-9]</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>\s</code></td>
+<td>1.对于Unicode（str类型）模式：匹配Unicode中的空白字符（包括[\t\n\r\f\v]以及其他空白字符）；如果开启了re.ASCII标志，就只匹配[\t\n\r\f\v]</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td>2.对于8位（bytes类型）模式：匹配ASCII中定义的空白字符，即[\t\n\r\f\v]</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>\S</code></td>
+<td>匹配任何非Unicode中的空白字符，其实就是与<code>\s</code>相反；如果开启了re.ASCII标志，则相当于匹配[^\t\n\r\f\v]</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>\w</code></td>
+<td>1.对于Unicode（str类型）模式：匹配Unicode中的单词字符，基本上所有语言的字符都可以匹配，当然也包括数字和下划线；如果开启了re.ASCII标志，就只匹配[a-zA-Z0-9_]</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td>2.对于8位（bytes类型）模式：匹配ASCII中定义的字母数字，即[a-zA-Z0-9_]</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>\W</code></td>
+<td>匹配任何非Unicode的单词字符，其实就是与<code>\w</code>相反；如果开启了re.ASCII标志，则相当于[^a-zA-Z0-9_]</td>
+</tr>
+<tr>
+<td style="text-align:center">转义字符</td>
+<td>正则表达式还支持大部分Python字符串的转义字符：\a,\b,\f,\n,\r,\t,\u,\U,\v,\x,\</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td>注1：\b通常用于匹配一个单词边界，只有在字符类中才表示“退格”</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td>注2：\u和\U只有在Unicode模式下才会被识别</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td>注3：八进制转义（\数字）是有限制的，如果第一个数字是0，或者如果有3个八进制数字，那么就被认为是八进制数；其他情况则被认为是子组引用；至于字符串，八进制转义总是最多只能是三个数字的长度</td>
+</tr>
+</tbody>
+</table>
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2015/08/Python-7/">Python3正则表达式特殊符号及用法</a></p>
+        <p><span>文章作者:</span><a href="/" title="访问 Lancelot 的个人博客">Lancelot</a></p>
+        <p><span>发布时间:</span>2015年08月01日 - 08时00分</p>
+        <p><span>最后更新:</span>2016年02月21日 - 15时01分</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2015/08/Python-7/" title="Python3正则表达式特殊符号及用法">http://darknight.me/2015/08/Python-7/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://darknight.me/2015/08/Python-7/　　作者: Lancelot" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script src="/js/clipboard.min.js"></script>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" title="中国大陆 (CC BY-NC-SA 3.0 CN)" target = "_blank">"署名-非商用-相同方式共享 3.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+            <div id="article-nav-newer" class="article-nav-title">
+                <a href="/2015/08/PythonStudy-32/">
+                    Python学习（32）：生成器
+                </a>
+            </div>
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2015/08/Python-5/">
+                    Python中集合的内建方法总结
+                </a>
+            </div>
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#本文来源：鱼C论坛"><span class="toc-number">1.</span> <span class="toc-text">本文来源：鱼C论坛</span></a></li></ol>
+</div>
+<style>
+    .left-col .switch-btn {
+        display: none;
+    }
+    .left-col .switch-area {
+        display: none;
+    }
+</style>
+
+<input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js" type="text/javascript"></script>
+<script>
+    var valueHide = "隐藏目录";
+    var valueShow = "显示目录";
+
+    if ($(".left-col").is(":hidden")) {
+        $("#tocButton").attr("value", valueShow);
+    }
+
+    $("#tocButton").click(function() {
+        if ($("#toc").is(":hidden")) {
+            $("#tocButton").attr("value", valueHide);
+            $("#toc").slideDown(320);
+            $(".switch-btn, .switch-area").fadeOut(300);
+        }
+        else {
+            $("#tocButton").attr("value", valueShow);
+            $("#toc").slideUp(350);
+            $(".switch-btn, .switch-area").fadeIn(500);
+        }
+    })
+
+    if ($(".toc").length < 1) {
+        $("#toc, #tocButton").hide();
+        $(".switch-btn, .switch-area").show();
+    }
+</script>
+
+
+
+
+    <div class="share">
+    <div class="bdsharebuttonbox">
+    <a href="#" class="bds_more" data-cmd="more"></a>
+    <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a href="#" class="bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+    <a href="#" class="bds_copy" data-cmd="copy" title="复制网址"></a>
+    <a href="#" class="bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+    <a href="#" class="bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+    </div>
+    <script>
+        window._bd_share_config={
+            "common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+    </script>
+</div>
+
+
+
+    
+      <div class="duoshuo" id="comments">
+    <!-- 多说评论框 start -->
+    <div class="ds-thread" data-thread-key="2015/08/Python-7/" data-title="Python3正则表达式特殊符号及用法" data-url="http://darknight.me/2015/08/Python-7/"></div>
+    <!-- 多说评论框 end -->
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+    <script type="text/javascript">
+    var duoshuoQuery = {short_name:"darknight"};
+    (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0] 
+         || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+    </script>
+    <!-- 多说公共JS代码 end -->
+</div>
+
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2015/08/PythonStudy-32/" title="上一篇: Python学习（32）：生成器">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2015/08/Python-5/" title="下一篇: Python中集合的内建方法总结">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016/02/JavaScript-4/">JavaScript中的那些方法：字符串</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/JavaScript-3/">JavaScript中的那些方法：数组</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/JavaScript-2/">JavaScript中的那些方法：计算</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/JavaScript-1/">JavaScript中的那些方法：函数</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/Skills-1/">那些你应该知道的编程技巧</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/09/Spring-1/">Spring服务器设置文件上传限制</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/09/PythonStudy-42/">Python学习（42）：爬虫：Scrapy</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/08/PythonStudy-41/">Python学习（41）：爬虫：异常处理</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/08/PythonStudy-40/">Python学习（40）：正则表达式2</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/08/PythonStudy-39/">Python学习（39）：正则表达式</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/08/PythonStudy-38/">Python学习（38）：爬虫：隐藏</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/08/PythonStudy-37/">Python学习（37）：爬虫：实战</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/08/PythonStudy-36/">Python学习（36）：爬虫：基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/08/PythonStudy-35/">Python学习（35）：模块学习：像极客一样思考</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/08/PythonStudy-34/">Python学习（34）：模块：\__name__=='\__main__'、搜索路径和包</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/08/PythonStudy-33/">Python学习（33）：模块</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/08/PythonStudy-32/">Python学习（32）：生成器</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/08/Python-7/">Python3正则表达式特殊符号及用法</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/08/Python-5/">Python中集合的内建方法总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/08/Python-4/">Python中的HTTP状态码</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/07/PythonStudy-30/">Python学习（30）：魔法方法：定制序列</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/07/PythonStudy-31/">Python学习（31）：魔法方法：迭代器</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/07/PythonStudy-29/">Python学习（29）：魔法方法：描述符（property的原理）</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/07/PythonStudy-28/">Python学习（28）：魔法方法：属性访问</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/07/PythonStudy-27/">Python学习（27）：魔法方法：一个计时器的定制</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/07/PythonStudy-26/">Python学习（26）：魔法方法：算术运算</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/07/PythonStudy-24/">Python学习（24）：类与对象BIF</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/07/PythonStudy-25/">Python学习（25）：魔法方法：构造和析构</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/07/PythonStudy-23/">Python学习（23）：类与对象拾遗</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/07/PythonStudy-22/">Python学习（22）：继承</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/07/PythonStudy-21/">Python学习（21）：类与对象</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/07/PythonStudy-20/">Python学习（20）：EasyGui入门</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/07/PythonStudy-19/">Python学习（19）：else语句&with语句</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/07/PythonStudy-18/">Python学习（18）：异常处理</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/07/PythonStudy-17/">Python学习（17）：永久存储（pickle模块）</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/07/PythonStudy-16/">Python学习（16）：模块&文件系统</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/07/Python-3/">Python魔法方法详解</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/07/Python-6/">Python编码问题的解决方案总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/07/Python-8/">Python：time模块详解</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/07/Python-9/">Python：timeit模块详解</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/07/Python-1/">Python鸭子类型</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/07/Python-2/">Python标准异常</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/07/PythonStudy-15/">Python学习（15）：文件</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/06/PythonStudy-14/">Python学习（14）：集合</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/06/PythonStudy-13/">Python学习（13）：字典</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/06/PythonStudy-12/">Python学习（12）：递归</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/06/PythonStudy-11/">Python学习（11）：lambda表达式、filter和map</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/06/PythonStudy-10/">Python学习（10）：内嵌函数和闭包</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/06/PythonStudy-9/">Python学习（9）：函数作用域</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/06/PythonStudy-8/">Python学习（8）：函数基础，函数文档及灵活的参数列表</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/06/PythonStudy-7/">Python学习（7）：序列</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/06/PythonStudy-6/">Python学习（6）：字符串格式化&格式化符号</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/06/PythonStudy-5/">Python学习（5）：元组&字符串内置函数</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/06/PythonStudy-4/">Python学习（4）：列表</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/06/PythonStudy-3/">Python学习（3）：常用操作符&分支和循环</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/06/PythonStudy-2/">Python学习（2）：Python中的数据类型</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/06/PythonStudy-1/">Python学习（1）：Python入门</a></li></ul>
+    <script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+    <script>
+        $(".post-list").addClass("toc-article");
+        $(".post-list-item a").attr("target","_blank");
+        $("#post-nav-button > a:nth-child(2)").click(function() {
+            $(".fa-bars, .fa-times").toggle();
+            $(".post-list").toggle(300);
+            if ($(".toc").length > 0) {
+                $("#toc, #tocButton").toggle(200, function() {
+                    if ($(".switch-area").is(":visible")) {
+                        $("#toc, .switch-btn, .switch-area").toggle();
+                        $("#tocButton").attr("value", valueHide);
+                        }
+                    })
+            }
+            else {
+                $(".switch-btn, .switch-area").fadeToggle(300);
+            }
+        })
+    </script>
+
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                &copy; 2016 Lancelot
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的静态博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减双栏 Hexo 博客主题">Yelee</a> by MOxFIVE
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" >本站到访数: 
+                            <span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>, </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit">本页阅读量: 
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+    </div>
+    
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js" type="text/javascript"></script>
+<script src="/js/main.js" type="text/javascript"></script>
+
+    <script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 5;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+
+<script>
+    $(document).ready(function() {
+        if ($("#comments").length < 1) {
+            $("#scroll > a:nth-child(2)").hide();
+        };
+    })
+</script>
+
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+</body>
+</html>

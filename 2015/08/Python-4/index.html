@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Python中的HTTP状态码 | DarKnight</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="本文来源：鱼C论坛因为Python默认会自动处理重定向方面的内容（状态码300-399范围），状态码100-299的范围表示成功，所以我们需要关注的是400-599这个范围的状态码（因为它们代表响应出了问题）">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python中的HTTP状态码">
+<meta property="og:url" content="http://darknight.me/2015/08/Python-4/index.html">
+<meta property="og:site_name" content="DarKnight">
+<meta property="og:description" content="本文来源：鱼C论坛因为Python默认会自动处理重定向方面的内容（状态码300-399范围），状态码100-299的范围表示成功，所以我们需要关注的是400-599这个范围的状态码（因为它们代表响应出了问题）">
+<meta property="og:updated_time" content="2016-02-21T06:41:38.431Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Python中的HTTP状态码">
+<meta name="twitter:description" content="本文来源：鱼C论坛因为Python默认会自动处理重定向方面的内容（状态码300-399范围），状态码100-299的范围表示成功，所以我们需要关注的是400-599这个范围的状态码（因为它们代表响应出了问题）">
+  
+    <link rel="alternative" href="/atom.xml" title="DarKnight" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+      <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css" type="text/css">
+  
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  
+  
+      <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  
+  <script>
+      var yiliaConfig = {
+          fancybox: true,
+          animate: true,
+          isHome: false,
+          isPost: true,
+          isArchive: false,
+          isTag: false,
+          isCategory: false,
+          open_in_new: false
+      }
+  </script>
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            
+            <img lazy-src="/img/photo.png" class="js-avatar">
+            
+        </a>
+
+        <hgroup>
+          <h1 class="header-author"><a href="/">Lancelot</a></h1>
+        </hgroup>
+
+        
+        <p class="header-subtitle">拖延癌治疗阶段</p>
+        
+                
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <li id="Email"><a class="Email" target="_blank" href="mailto:darknight4lancelot@gmail.com" title="Email"></a></li>
+                            
+                                <li id="新浪微博"><a class="新浪微博" target="_blank" href="http://weibo.com/u/2556148711" title="新浪微博"></a></li>
+                            
+                                <li id="GitHub"><a class="GitHub" target="_blank" href="https://github.com/wanghaoxyq" title="GitHub"></a></li>
+                            
+                                <li id="网易云音乐"><a class="网易云音乐" target="_blank" href="http://music.163.com/#/user/home?id=42137986" title="网易云音乐"></a></li>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/JavaScript/" style="font-size: 14px;">JavaScript</a> <a href="/tags/Python/" style="font-size: 16px;">Python</a> <a href="/tags/Python学习笔记/" style="font-size: 18px;">Python学习笔记</a> <a href="/tags/Spring/" style="font-size: 10px;">Spring</a> <a href="/tags/fishc-com/" style="font-size: 20px;">fishc.com</a> <a href="/tags/代码编写技巧/" style="font-size: 10px;">代码编写技巧</a> <a href="/tags/正则表达式/" style="font-size: 12px;">正则表达式</a>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="https://hexo.io">Hexo</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="https://pages.github.com/">GitHub</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://moxfive.xyz/">MOxFIVE</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">生命在于折腾</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">Lancelot</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                
+                    <img lazy-src="/img/photo.png" class="js-avatar">
+                
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">Lancelot</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">拖延癌治疗阶段</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <li id="Email"><a class="Email" target="_blank" href="mailto:darknight4lancelot@gmail.com" title="Email"></a></li>
+                            
+                                <li id="新浪微博"><a class="新浪微博" target="_blank" href="http://weibo.com/u/2556148711" title="新浪微博"></a></li>
+                            
+                                <li id="GitHub"><a class="GitHub" target="_blank" href="https://github.com/wanghaoxyq" title="GitHub"></a></li>
+                            
+                                <li id="网易云音乐"><a class="网易云音乐" target="_blank" href="http://music.163.com/#/user/home?id=42137986" title="网易云音乐"></a></li>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+</nav>
+      <div class="body-wrap"><article id="post-Python-4" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/08/Python-4/" class="article-date">
+      <time datetime="2015-08-01T00:00:00.000Z" itemprop="datePublished">2015-08-01</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Python中的HTTP状态码
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/">Python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/fishc-com/">fishc.com</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h2 id="本文来源：鱼C论坛"><a href="#本文来源：鱼C论坛" class="headerlink" title="本文来源：鱼C论坛"></a>本文来源：<a href="http://bbs.fishc.com/forum.php?mod=viewthread&amp;tid=58229&amp;extra=page%3D1%26filter%3Dtypeid%26typeid%3D403" target="_blank" rel="external">鱼C论坛</a></h2><p>因为Python默认会自动处理重定向方面的内容（状态码300-399范围），状态码100-299的范围表示成功，所以我们需要关注的是400-599这个范围的状态码（因为它们代表响应出了问题）</p>
+<a id="more"></a>
+<p><strong>http.server.BaseHTTPRequestHandler.responses</strong> 这个字典展示了所有RFC 2616会用到的状态码，为了方便，记录如下：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Table mapping response codes to messages; entries have the</span></span><br><span class="line"><span class="comment"># form &#123;code: (shortmessage, longmessage)&#125;.</span></span><br><span class="line">responses = &#123;</span><br><span class="line">    <span class="number">100</span>: (<span class="string">'Continue'</span>, <span class="string">'Request received, please continue'</span>),</span><br><span class="line">    <span class="number">101</span>: (<span class="string">'Switching Protocols'</span>,</span><br><span class="line">          <span class="string">'Switching to new protocol; obey Upgrade header'</span>),</span><br><span class="line"></span><br><span class="line">    <span class="number">200</span>: (<span class="string">'OK'</span>, <span class="string">'Request fulfilled, document follows'</span>),</span><br><span class="line">    <span class="number">201</span>: (<span class="string">'Created'</span>, <span class="string">'Document created, URL follows'</span>),</span><br><span class="line">    <span class="number">202</span>: (<span class="string">'Accepted'</span>,</span><br><span class="line">          <span class="string">'Request accepted, processing continues off-line'</span>),</span><br><span class="line">    <span class="number">203</span>: (<span class="string">'Non-Authoritative Information'</span>, <span class="string">'Request fulfilled from cache'</span>),</span><br><span class="line">    <span class="number">204</span>: (<span class="string">'No Content'</span>, <span class="string">'Request fulfilled, nothing follows'</span>),</span><br><span class="line">    <span class="number">205</span>: (<span class="string">'Reset Content'</span>, <span class="string">'Clear input form for further input.'</span>),</span><br><span class="line">    <span class="number">206</span>: (<span class="string">'Partial Content'</span>, <span class="string">'Partial content follows.'</span>),</span><br><span class="line"></span><br><span class="line">    <span class="number">300</span>: (<span class="string">'Multiple Choices'</span>,</span><br><span class="line">          <span class="string">'Object has several resources -- see URI list'</span>),</span><br><span class="line">    <span class="number">301</span>: (<span class="string">'Moved Permanently'</span>, <span class="string">'Object moved permanently -- see URI list'</span>),</span><br><span class="line">    <span class="number">302</span>: (<span class="string">'Found'</span>, <span class="string">'Object moved temporarily -- see URI list'</span>),</span><br><span class="line">    <span class="number">303</span>: (<span class="string">'See Other'</span>, <span class="string">'Object moved -- see Method and URL list'</span>),</span><br><span class="line">    <span class="number">304</span>: (<span class="string">'Not Modified'</span>,</span><br><span class="line">          <span class="string">'Document has not changed since given time'</span>),</span><br><span class="line">    <span class="number">305</span>: (<span class="string">'Use Proxy'</span>,</span><br><span class="line">          <span class="string">'You must use proxy specified in Location to access this '</span></span><br><span class="line">          <span class="string">'resource.'</span>),</span><br><span class="line">    <span class="number">307</span>: (<span class="string">'Temporary Redirect'</span>,</span><br><span class="line">          <span class="string">'Object moved temporarily -- see URI list'</span>),</span><br><span class="line"></span><br><span class="line">    <span class="number">400</span>: (<span class="string">'Bad Request'</span>,</span><br><span class="line">          <span class="string">'Bad request syntax or unsupported method'</span>),</span><br><span class="line">    <span class="number">401</span>: (<span class="string">'Unauthorized'</span>,</span><br><span class="line">          <span class="string">'No permission -- see authorization schemes'</span>),</span><br><span class="line">    <span class="number">402</span>: (<span class="string">'Payment Required'</span>,</span><br><span class="line">          <span class="string">'No payment -- see charging schemes'</span>),</span><br><span class="line">    <span class="number">403</span>: (<span class="string">'Forbidden'</span>,</span><br><span class="line">          <span class="string">'Request forbidden -- authorization will not help'</span>),</span><br><span class="line">    <span class="number">404</span>: (<span class="string">'Not Found'</span>, <span class="string">'Nothing matches the given URI'</span>),</span><br><span class="line">    <span class="number">405</span>: (<span class="string">'Method Not Allowed'</span>,</span><br><span class="line">          <span class="string">'Specified method is invalid for this server.'</span>),</span><br><span class="line">    <span class="number">406</span>: (<span class="string">'Not Acceptable'</span>, <span class="string">'URI not available in preferred format.'</span>),</span><br><span class="line">    <span class="number">407</span>: (<span class="string">'Proxy Authentication Required'</span>, <span class="string">'You must authenticate with '</span></span><br><span class="line">          <span class="string">'this proxy before proceeding.'</span>),</span><br><span class="line">    <span class="number">408</span>: (<span class="string">'Request Timeout'</span>, <span class="string">'Request timed out; try again later.'</span>),</span><br><span class="line">    <span class="number">409</span>: (<span class="string">'Conflict'</span>, <span class="string">'Request conflict.'</span>),</span><br><span class="line">    <span class="number">410</span>: (<span class="string">'Gone'</span>,</span><br><span class="line">          <span class="string">'URI no longer exists and has been permanently removed.'</span>),</span><br><span class="line">    <span class="number">411</span>: (<span class="string">'Length Required'</span>, <span class="string">'Client must specify Content-Length.'</span>),</span><br><span class="line">    <span class="number">412</span>: (<span class="string">'Precondition Failed'</span>, <span class="string">'Precondition in headers is false.'</span>),</span><br><span class="line">    <span class="number">413</span>: (<span class="string">'Request Entity Too Large'</span>, <span class="string">'Entity is too large.'</span>),</span><br><span class="line">    <span class="number">414</span>: (<span class="string">'Request-URI Too Long'</span>, <span class="string">'URI is too long.'</span>),</span><br><span class="line">    <span class="number">415</span>: (<span class="string">'Unsupported Media Type'</span>, <span class="string">'Entity body in unsupported format.'</span>),</span><br><span class="line">    <span class="number">416</span>: (<span class="string">'Requested Range Not Satisfiable'</span>,</span><br><span class="line">          <span class="string">'Cannot satisfy request range.'</span>),</span><br><span class="line">    <span class="number">417</span>: (<span class="string">'Expectation Failed'</span>,</span><br><span class="line">          <span class="string">'Expect condition could not be satisfied.'</span>),</span><br><span class="line"></span><br><span class="line">    <span class="number">500</span>: (<span class="string">'Internal Server Error'</span>, <span class="string">'Server got itself in trouble'</span>),</span><br><span class="line">    <span class="number">501</span>: (<span class="string">'Not Implemented'</span>,</span><br><span class="line">          <span class="string">'Server does not support this operation'</span>),</span><br><span class="line">    <span class="number">502</span>: (<span class="string">'Bad Gateway'</span>, <span class="string">'Invalid responses from another server/proxy.'</span>),</span><br><span class="line">    <span class="number">503</span>: (<span class="string">'Service Unavailable'</span>,</span><br><span class="line">          <span class="string">'The server cannot process the request due to a high load'</span>),</span><br><span class="line">    <span class="number">504</span>: (<span class="string">'Gateway Timeout'</span>,</span><br><span class="line">          <span class="string">'The gateway server did not receive a timely response'</span>),</span><br><span class="line">    <span class="number">505</span>: (<span class="string">'HTTP Version Not Supported'</span>, <span class="string">'Cannot fulfill request.'</span>),</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+<p>翻译为中文格式：<br>|状态码|内容|详细内容|<br>|——|—-|——–|<br>|<strong>1xx</strong>||<strong>这一类型的状态码，代表请求已被接受，需要继续处理</strong>|<br>|100|Continue|收到请求，客户端应当继续发送请求|<br>|101|Switching Protocols|服务器通过Upgrade消息头通知客户端采用不同的协议来完成这个请求|<br>|<strong>2xx</strong>|<strong>成功</strong>|<strong>这一类型的状态码，代表请求已成功被服务器接收、理解、并接受</strong>|<br>|200|OK|请求已成功，请求的响应头或数据体将随此响应返回|<br>|201|Created|请求已经被实现，而且有一个新的资源已经依据请求的需要而创建，而其URI已经随Location头信息返回|<br>|202|Accepted|服务器已接受请求，但尚未处理。正如它可能被拒绝一样，最终该请求可能会也可能不会被执行|<br>|203|Non-Authoritative Information|服务器已成功处理了请求，但返回的实体头部元信息不是在原始服务器上有效的确定集合，而是来自本地或者第三方的拷贝|<br>|204|No Content|服务器成功处理了请求，但没有返回任何实体内容|<br>|205|Reset Content|服务器成功处理了请求，且没有返回任何内容。但是与204响应不同，返回此状态码的响应要求请求者重置文档视图|<br>|206|Partial Content|服务器已经成功处理了部分GET请求|<br>|<strong>3xx</strong>|<strong>重定向</strong>|<strong>这类状态码代表需要客户端采取进一步的操作才能完成请求。通常，这些状态码用来重定向，后续的请求地址（重定向目标）在本次响应的Location域中指明</strong>|<br>|300|Multiple Choices|被请求的资源有一系列可供选择的回馈信息，每个都有自己特定的地址和浏览器驱动的商议信息。用户或浏览器能够自行选择一个首选的地址进行重定向|<br>|301|Moved Permanently|被请求的资源已永久移动到新位置，并且将来任何对此资源的引用都应该使用本响应返回的若干个URI之一|<br>|302|Found|请求的资源现在临时从不同的URI响应请求。由于这样的重定向是临时的，客户端应当继续向原有地址发送以后的请求|<br>|303|See Other|对应当前请求的响应可以在另一个URI上被找到，而且客户端应当采用GET的方式访问那个资源|<br>|304|Not Modified|如果客户端发送了一个带条件的GET请求且该请求已被允许，而文档的内容（自上次访问以来或者根据请求的条件）并没有改变，则服务器应当返回这个状态码|<br>|305|Use Proxy|被请求的资源必须通过指定的代理才能被访问。Location域中将给出指定的代理所在的URI信息，接收者需要重复发送一个单独的请求，通过这个代理才能访问相应资源|<br>|307|Temporary Redirect|请求的资源现在临时从不同的URI响应请求。由于这样的重定向是临时的，客户端应当继续向原有地址发送以后的请求|<strong>4xx</strong>|<strong>客户端错误</strong>|<strong>这类的状态码代表了客户端看起来可能发生了错误，妨碍了服务器的处理</strong>|<br>|400|Bad Request|由于包含语法错误，当前请求无法被服务器理解|<br>|401|Unauthorized|当前请求需要用户验证|<br>|402|Payment Required|该状态码是为了将来可能的需求而预留的|<br>|403|Forbidden|服务器已经理解请求，但是拒绝执行|<br>|404|Not Found|请求失败，请求的资源在服务器上找不到|<br>|405|Method Not Allowed|请求中指定的请求方法不能被用于请求相应的资源|<br>|406|Not Acceptable|请求的资源的内容特性无法满足请求头中的条件，因而无法生成响应实体|<br>|407|Proxy Authentication Required|与401状态码类似，只不过客户端必须在代理服务器上进行身份验证|<br>|408|Request Timeout|请求超时，客户端没有在服务器预备等待的时间内完成一个请求的发送|<br>|409|Conflict|由于和被请求的资源的当前状态之间存在冲突，请求无法完成|<br>|410|Gone|被请求的资源在服务器上已经不再可用，而且没有任何已知的转发地址|<br>|411|Length Required|服务器拒绝在没有定义Content-Length头的情况下接受请求|<br>|412|Precondition Failed|服务器在验证请求头字段中给出先决条件时，没能满足其中的一个或多个|<br>|413|Request Entity Too Large|服务器拒绝处理当前请求，因为该请求提交的实体数据大小超过了服务器愿意或者能够处理的范围|<br>|414|Request-URI Too Long|请求的URI长度超过了服务器能够解释的长度，因此服务器拒绝对该请求提供服务|<br>|415|Unsupported Media Type|对于当前请求的方法和所请求的资源，请求中提交的实体并不是服务器中所支持的格式，因此请求被拒绝|<br>|416|Requested Range Not Satisfiable|如果请求中包含了Range请求头，并且Range中指定的任何数据范围都与当前资源的可用范围不重合，同时请求中又没有定义If-Range请求头，那么服务器就应当返回416状态码|<br>|417|Expectation Failed|在请求头Expect中指定的预期内容无法被服务器满足，或者这个服务器是一个代理服务器，它有明显的证据证明在当前路由的下一个节点上，Expect的内容无法被满足|<br>|<strong>5xx</strong>|<strong>服务器错误</strong>|<strong>这类状态码代表了服务器在处理请求的过程中有错误或者异常状态发生</strong>|<br>|500|Internal Server Error|服务器遇到了一个未曾预料的状况，导致了它无法完成对请求的处理|<br>|501|Not Implemented|服务器不支持当前请求所需要的某个功能|<br>|502|Bad Gateway|作为网关或者代理工作的服务器尝试执行请求时，从上游服务器接收到无效的响应|<br>|503|Service Unavailable|由于临时的服务器维护或者过载，服务器当前无法处理请求|<br>|504|Gateway Timeout|作为网关或者代理工作的服务器尝试执行请求时，未能及时从上游服务器（URI标识出的服务器，例如HTTP、FTP、LDAP）或者辅助服务器（例如DNS）收到响应|<br>|505|HTTP Version Not Supported|服务器不支持，或者拒绝支持在请求中使用的HTTP版本|</p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2015/08/Python-4/">Python中的HTTP状态码</a></p>
+        <p><span>文章作者:</span><a href="/" title="访问 Lancelot 的个人博客">Lancelot</a></p>
+        <p><span>发布时间:</span>2015年08月01日 - 08时00分</p>
+        <p><span>最后更新:</span>2016年02月21日 - 14时41分</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2015/08/Python-4/" title="Python中的HTTP状态码">http://darknight.me/2015/08/Python-4/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://darknight.me/2015/08/Python-4/　　作者: Lancelot" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script src="/js/clipboard.min.js"></script>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" title="中国大陆 (CC BY-NC-SA 3.0 CN)" target = "_blank">"署名-非商用-相同方式共享 3.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+            <div id="article-nav-newer" class="article-nav-title">
+                <a href="/2015/08/Python-5/">
+                    Python中集合的内建方法总结
+                </a>
+            </div>
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2015/07/PythonStudy-30/">
+                    Python学习（30）：魔法方法：定制序列
+                </a>
+            </div>
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#本文来源：鱼C论坛"><span class="toc-number">1.</span> <span class="toc-text">本文来源：鱼C论坛</span></a></li></ol>
+</div>
+<style>
+    .left-col .switch-btn {
+        display: none;
+    }
+    .left-col .switch-area {
+        display: none;
+    }
+</style>
+
+<input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js" type="text/javascript"></script>
+<script>
+    var valueHide = "隐藏目录";
+    var valueShow = "显示目录";
+
+    if ($(".left-col").is(":hidden")) {
+        $("#tocButton").attr("value", valueShow);
+    }
+
+    $("#tocButton").click(function() {
+        if ($("#toc").is(":hidden")) {
+            $("#tocButton").attr("value", valueHide);
+            $("#toc").slideDown(320);
+            $(".switch-btn, .switch-area").fadeOut(300);
+        }
+        else {
+            $("#tocButton").attr("value", valueShow);
+            $("#toc").slideUp(350);
+            $(".switch-btn, .switch-area").fadeIn(500);
+        }
+    })
+
+    if ($(".toc").length < 1) {
+        $("#toc, #tocButton").hide();
+        $(".switch-btn, .switch-area").show();
+    }
+</script>
+
+
+
+
+    <div class="share">
+    <div class="bdsharebuttonbox">
+    <a href="#" class="bds_more" data-cmd="more"></a>
+    <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a href="#" class="bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+    <a href="#" class="bds_copy" data-cmd="copy" title="复制网址"></a>
+    <a href="#" class="bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+    <a href="#" class="bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+    </div>
+    <script>
+        window._bd_share_config={
+            "common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+    </script>
+</div>
+
+
+
+    
+      <div class="duoshuo" id="comments">
+    <!-- 多说评论框 start -->
+    <div class="ds-thread" data-thread-key="2015/08/Python-4/" data-title="Python中的HTTP状态码" data-url="http://darknight.me/2015/08/Python-4/"></div>
+    <!-- 多说评论框 end -->
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+    <script type="text/javascript">
+    var duoshuoQuery = {short_name:"darknight"};
+    (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0] 
+         || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+    </script>
+    <!-- 多说公共JS代码 end -->
+</div>
+
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2015/08/Python-5/" title="上一篇: Python中集合的内建方法总结">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2015/07/PythonStudy-30/" title="下一篇: Python学习（30）：魔法方法：定制序列">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016/02/JavaScript-4/">JavaScript中的那些方法：字符串</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/JavaScript-3/">JavaScript中的那些方法：数组</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/JavaScript-2/">JavaScript中的那些方法：计算</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/JavaScript-1/">JavaScript中的那些方法：函数</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/Skills-1/">那些你应该知道的编程技巧</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/09/Spring-1/">Spring服务器设置文件上传限制</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/09/PythonStudy-42/">Python学习（42）：爬虫：Scrapy</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/08/PythonStudy-41/">Python学习（41）：爬虫：异常处理</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/08/PythonStudy-40/">Python学习（40）：正则表达式2</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/08/PythonStudy-39/">Python学习（39）：正则表达式</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/08/PythonStudy-38/">Python学习（38）：爬虫：隐藏</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/08/PythonStudy-37/">Python学习（37）：爬虫：实战</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/08/PythonStudy-36/">Python学习（36）：爬虫：基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/08/PythonStudy-35/">Python学习（35）：模块学习：像极客一样思考</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/08/PythonStudy-34/">Python学习（34）：模块：\__name__=='\__main__'、搜索路径和包</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/08/PythonStudy-33/">Python学习（33）：模块</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/08/PythonStudy-32/">Python学习（32）：生成器</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/08/Python-7/">Python3正则表达式特殊符号及用法</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/08/Python-5/">Python中集合的内建方法总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/08/Python-4/">Python中的HTTP状态码</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/07/PythonStudy-30/">Python学习（30）：魔法方法：定制序列</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/07/PythonStudy-31/">Python学习（31）：魔法方法：迭代器</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/07/PythonStudy-29/">Python学习（29）：魔法方法：描述符（property的原理）</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/07/PythonStudy-28/">Python学习（28）：魔法方法：属性访问</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/07/PythonStudy-27/">Python学习（27）：魔法方法：一个计时器的定制</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/07/PythonStudy-26/">Python学习（26）：魔法方法：算术运算</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/07/PythonStudy-24/">Python学习（24）：类与对象BIF</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/07/PythonStudy-25/">Python学习（25）：魔法方法：构造和析构</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/07/PythonStudy-23/">Python学习（23）：类与对象拾遗</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/07/PythonStudy-22/">Python学习（22）：继承</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/07/PythonStudy-21/">Python学习（21）：类与对象</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/07/PythonStudy-20/">Python学习（20）：EasyGui入门</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/07/PythonStudy-19/">Python学习（19）：else语句&with语句</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/07/PythonStudy-18/">Python学习（18）：异常处理</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/07/PythonStudy-17/">Python学习（17）：永久存储（pickle模块）</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/07/PythonStudy-16/">Python学习（16）：模块&文件系统</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/07/Python-3/">Python魔法方法详解</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/07/Python-6/">Python编码问题的解决方案总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/07/Python-8/">Python：time模块详解</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/07/Python-9/">Python：timeit模块详解</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/07/Python-1/">Python鸭子类型</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/07/Python-2/">Python标准异常</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/07/PythonStudy-15/">Python学习（15）：文件</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/06/PythonStudy-14/">Python学习（14）：集合</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/06/PythonStudy-13/">Python学习（13）：字典</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/06/PythonStudy-12/">Python学习（12）：递归</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/06/PythonStudy-11/">Python学习（11）：lambda表达式、filter和map</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/06/PythonStudy-10/">Python学习（10）：内嵌函数和闭包</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/06/PythonStudy-9/">Python学习（9）：函数作用域</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/06/PythonStudy-8/">Python学习（8）：函数基础，函数文档及灵活的参数列表</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/06/PythonStudy-7/">Python学习（7）：序列</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/06/PythonStudy-6/">Python学习（6）：字符串格式化&格式化符号</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/06/PythonStudy-5/">Python学习（5）：元组&字符串内置函数</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/06/PythonStudy-4/">Python学习（4）：列表</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/06/PythonStudy-3/">Python学习（3）：常用操作符&分支和循环</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/06/PythonStudy-2/">Python学习（2）：Python中的数据类型</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/06/PythonStudy-1/">Python学习（1）：Python入门</a></li></ul>
+    <script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+    <script>
+        $(".post-list").addClass("toc-article");
+        $(".post-list-item a").attr("target","_blank");
+        $("#post-nav-button > a:nth-child(2)").click(function() {
+            $(".fa-bars, .fa-times").toggle();
+            $(".post-list").toggle(300);
+            if ($(".toc").length > 0) {
+                $("#toc, #tocButton").toggle(200, function() {
+                    if ($(".switch-area").is(":visible")) {
+                        $("#toc, .switch-btn, .switch-area").toggle();
+                        $("#tocButton").attr("value", valueHide);
+                        }
+                    })
+            }
+            else {
+                $(".switch-btn, .switch-area").fadeToggle(300);
+            }
+        })
+    </script>
+
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                &copy; 2016 Lancelot
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的静态博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减双栏 Hexo 博客主题">Yelee</a> by MOxFIVE
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" >本站到访数: 
+                            <span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>, </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit">本页阅读量: 
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+    </div>
+    
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js" type="text/javascript"></script>
+<script src="/js/main.js" type="text/javascript"></script>
+
+    <script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 5;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+
+<script>
+    $(document).ready(function() {
+        if ($("#comments").length < 1) {
+            $("#scroll > a:nth-child(2)").hide();
+        };
+    })
+</script>
+
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+</body>
+</html>
