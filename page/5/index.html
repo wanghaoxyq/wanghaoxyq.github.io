@@ -219,10 +219,10 @@
 </nav>
       <div class="body-wrap">
   
-    <article id="post-Python-1" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-Python-8" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2015/07/Python-1/" class="article-date">
+      <a href="/2015/07/Python-8/" class="article-date">
       <time datetime="2015-07-01T00:00:00.000Z" itemprop="datePublished">2015-07-01</time>
 </a>
     </div>
@@ -236,7 +236,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2015/07/Python-1/">Python鸭子类型</a>
+      <a class="article-title" href="/2015/07/Python-8/">Python：time模块详解</a>
     </h1>
   
 
@@ -246,13 +246,19 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-              <h2 id="本文来源：鱼C论坛"><a href="#本文来源：鱼C论坛" class="headerlink" title="本文来源：鱼C论坛"></a>本文来源：<a href="http://bbs.fishc.com/forum.php?mod=viewthread&amp;tid=51471&amp;extra=page%3D1%26filter%3Dtypeid%26typeid%3D403">鱼C论坛</a></h2><h3 id="鸭子类型（duck-typing）"><a href="#鸭子类型（duck-typing）" class="headerlink" title="鸭子类型（duck typing）"></a>鸭子类型（duck typing）</h3><p>在程序设计中，鸭子类型是动态类型的一种风格。</p>
-<p>在这种风格中，一个对象有效的语义， 不是由继承自特定的类或实现特定的接口，而是由当前方法和属性的集合决定。</p>
-<p>这个概念的名字来源于由James Whitcomb Riley提出的鸭子测试，“鸭子测试”可以这样表述：</p>
-<blockquote>
-<p>当看到一只鸟走起来像鸭子、游泳像鸭子、叫起来也像鸭子，那么这只鸟就可以被称为鸭子。</p>
-</blockquote>
-<p>在鸭子类型中，关注的不是对象的类型本身，而是它是如何使用的。<br>
+              <h2 id="本文来源：鱼C论坛"><a href="#本文来源：鱼C论坛" class="headerlink" title="本文来源：鱼C论坛"></a>本文来源：<a href="http://bbs.fishc.com/thread-51326-1-2.html">鱼C论坛</a></h2><h3 id="time模块：时间获取和转换"><a href="#time模块：时间获取和转换" class="headerlink" title="time模块：时间获取和转换"></a>time模块：时间获取和转换</h3><p>在Python中，与时间处理有关的模块包括：time, datetime 以及 calendar</p>
+<p><strong>注意</strong>：</p>
+<ul>
+<li>虽然time模块总是可用，但并非所有功能都适用于各个平台</li>
+<li>该模块中定义的大部分函数是调用C平台上的同名函数实现，所以各个平台上实现可能略有不同</li>
+</ul>
+<p><strong>一些术语和约定的解释</strong>：</p>
+<ul>
+<li>时间戳（timestamp）：通常来说，时间戳表示的是从1970年1月1日00:00:00开始按秒计算的偏移量（time.gmtime(0)），此模块中的函数无法处理1970年以前的日期和时间或太遥远的未来（处理极限取决于C函数库，对于32位系统来说，是2038年）</li>
+<li>UTC（Coordinated Universal Time，世界协调时）也叫格林威治天文时间，是世界标准时间。在中国为UTC+8</li>
+<li>DST（Daylight Saving Time）即夏令时的意思</li>
+<li>一些实时函数的计算精度可能低于它们建议的值或参数，例如在大部分Unix系统，时钟一秒钟“滴答”50~100次</li>
+</ul>
           
       
     </div>
@@ -268,7 +274,7 @@
 
       
         <p class="article-more-link">
-          <a  href="/2015/07/Python-1/#more">more >></a>
+          <a  href="/2015/07/Python-8/#more">more >></a>
         </p>
       
       <div class="clearfix"></div>
@@ -286,10 +292,10 @@
 
 
   
-    <article id="post-Python-2" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-Python-9" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2015/07/Python-2/" class="article-date">
+      <a href="/2015/07/Python-9/" class="article-date">
       <time datetime="2015-07-01T00:00:00.000Z" itemprop="datePublished">2015-07-01</time>
 </a>
     </div>
@@ -303,7 +309,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2015/07/Python-2/">Python标准异常</a>
+      <a class="article-title" href="/2015/07/Python-9/">Python：timeit模块详解</a>
     </h1>
   
 
@@ -313,7 +319,12 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-              <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">AssertionError          <span class="comment">#断言语句（assert）失败</span></span><br><span class="line">AttributeError          <span class="comment">#尝试访问未知的对象属性</span></span><br><span class="line">EOFError                <span class="comment">#用户输入文件末尾标志EOF（Ctrl + d）</span></span><br><span class="line">FloatingPointError      <span class="comment">#浮点计算错误</span></span><br><span class="line">GeneratorExit           <span class="comment">#generator.close()方法被调用的时候</span></span><br><span class="line">ImportError             <span class="comment">#导入模块失败的时候</span></span><br><span class="line">IndexError              <span class="comment">#索引超出序列的范围</span></span><br><span class="line">KeyError                <span class="comment">#字典中查找一个不存在的关键字</span></span><br><span class="line">KeyboardInterrupt       <span class="comment">#用户输入中断键（Ctrl + c）</span></span><br><span class="line">MemoryError             <span class="comment">#内存溢出（可通过删除对象释放内存）</span></span><br><span class="line">NameError               <span class="comment">#尝试访问一个不存在的变量</span></span><br><span class="line">NotImplementedError     <span class="comment">#尚未实现的方法</span></span><br><span class="line">OSError                 <span class="comment">#操作系统产生的异常（例如打开一个不存在的文件）</span></span><br><span class="line">OverflowError           <span class="comment">#数值运算超出最大限制</span></span><br><span class="line">ReferenceError          <span class="comment">#弱引用（weak reference）试图访问一个已经被垃圾回收机制回收了的对象</span></span><br><span class="line">RuntimeError            <span class="comment">#一般的运行时错误</span></span><br><span class="line">StopIteration           <span class="comment">#迭代器没有更多的值</span></span><br><span class="line">SyntaxError             <span class="comment">#Python的语法错误</span></span><br><span class="line">IndentationError        <span class="comment">#缩进错误</span></span><br><span class="line">TabError                <span class="comment">#Tab和空格混合使用</span></span><br><span class="line">SystemError             <span class="comment">#Python编译器系统错误</span></span><br><span class="line">SystemExit              <span class="comment">#Python编译器进程被关闭</span></span><br><span class="line">TypeError               <span class="comment">#不同类型间的无效操作</span></span><br><span class="line">UnboundLocalError       <span class="comment">#访问一个未初始化的本地变量（NameError的子类）</span></span><br><span class="line">UnicodeError            <span class="comment">#Unicode相关的错误（ValueError的子类）</span></span><br><span class="line">UnicodeEncodeError      <span class="comment">#Unicode编码时的错误（UnicodeError的子类）</span></span><br><span class="line">UnicodeDecodeError      <span class="comment">#Unicode解码时的错误（UnicodeError的子类）</span></span><br><span class="line">UnicodeTranslateError   <span class="comment">#Unicode转换时的错误（UnicodeError的子类）</span></span><br><span class="line">ValueError              <span class="comment">#传入无效的参数</span></span><br><span class="line">ZeroDivisionError       <span class="comment">#除数为零</span></span><br></pre></td></tr></table></figure>
+              <h2 id="来源：鱼C论坛"><a href="#来源：鱼C论坛" class="headerlink" title="来源：鱼C论坛"></a>来源：<a href="http://bbs.fishc.com/thread-55593-1-1.html">鱼C论坛</a></h2><h3 id="timeit模块–准确测量小段代码的执行时间"><a href="#timeit模块–准确测量小段代码的执行时间" class="headerlink" title="timeit模块–准确测量小段代码的执行时间"></a>timeit模块–准确测量小段代码的执行时间</h3><p>timeit模块提供了测量Python小段代码执行时间的方法。它即可以在命令行界面直接使用，也可以通过导入模块进行调用。该模块灵活地避开了测量执行时间所容易出现的错误。</p>
+<p>以下是命令行界面使用的例子：<br><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ python -m timeit '"-".join(str(n) <span class="flow">for</span> n <span class="flow">in</span> range(<span class="number">100</span>))'</span><br><span class="line"><span class="number">10000</span> loops, best of <span class="number">3</span>: <span class="number">40</span>.<span class="number">3</span> usec per loop</span><br><span class="line">$ python -m timeit '"-".join([str(n) <span class="flow">for</span> n <span class="flow">in</span> range(<span class="number">100</span>)])'</span><br><span class="line"><span class="number">10000</span> loops, best of <span class="number">3</span>: <span class="number">33</span>.<span class="number">4</span> usec per loop</span><br><span class="line">$ python -m timeit '"-".join(map(str, range(<span class="number">100</span>)))'</span><br><span class="line"><span class="number">10000</span> loops, best of <span class="number">3</span>: <span class="number">25</span>.<span class="number">2</span> usec per loop</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>在命令行下运行出错，SyntaxError:EOL while scanning string literal<br>为什么出错？暂时不明白。</p>
+</blockquote>
+<p>以下是在Python下导入模块调用的例子：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> timeit</span><br><span class="line">timeit.timeit(<span class="string">'"-".join(str(n) for n in range(100))'</span>, number=<span class="number">10000</span>)</span><br><span class="line">timeit.timeit(<span class="string">'"-".join([str(n) for n in range(100)])'</span>, number=<span class="number">10000</span>)</span><br><span class="line">timeit.timeit(<span class="string">'"-".join(map(str, range(100)))'</span>, number=<span class="number">10000</span>)</span><br><span class="line"><span class="comment">#每次运行结果都不太一样，这里不记录</span></span><br></pre></td></tr></table></figure></p>
           
       
     </div>
@@ -329,7 +340,7 @@
 
       
         <p class="article-more-link">
-          <a  href="/2015/07/Python-2/#more">more >></a>
+          <a  href="/2015/07/Python-9/#more">more >></a>
         </p>
       
       <div class="clearfix"></div>
