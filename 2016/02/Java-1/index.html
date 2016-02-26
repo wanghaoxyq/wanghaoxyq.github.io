@@ -3,36 +3,24 @@
 <head>
   <meta charset="utf-8">
   
-  <title>那些你应该知道的编程技巧 | DarKnight</title>
+  <title>Java中的定时器：Timer | DarKnight</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="当使用if/else方法时，你应该考虑一下是否能将其修改为三目运算符以提高代码的简洁性和可读性。
-
-12345if(a == b)    return true;return false;#可以修改为：return a == b ? true : false;
-
-当使用三目运算符时，你应该考虑其返回值是否可以简化为true和false从而直接根据第一个条件进行返回。
-
-123return a ==">
+  <meta name="description" content="Timer使用经验在之前的工作中，因为需要爬虫能够定时执行，所以使用了Java本身提供的Timer类。为了避免遗忘，记录于此。
+Timer是Java本身所包含的工具类，其引用路径为java.util.Timer；在使用中，我们还需要引用一个类，java.util.TimerTask，用来为Timer指定工作任务。
+要定时执行某项任务其实非常简单，只需要创建一个TimerTask对象，设置好任务后，">
 <meta property="og:type" content="article">
-<meta property="og:title" content="那些你应该知道的编程技巧">
-<meta property="og:url" content="http://darknight.me/2016/02/Skills-1/index.html">
+<meta property="og:title" content="Java中的定时器：Timer">
+<meta property="og:url" content="http://darknight.me/2016/02/Java-1/index.html">
 <meta property="og:site_name" content="DarKnight">
-<meta property="og:description" content="当使用if/else方法时，你应该考虑一下是否能将其修改为三目运算符以提高代码的简洁性和可读性。
-
-12345if(a == b)    return true;return false;#可以修改为：return a == b ? true : false;
-
-当使用三目运算符时，你应该考虑其返回值是否可以简化为true和false从而直接根据第一个条件进行返回。
-
-123return a ==">
-<meta property="og:updated_time" content="2016-02-21T06:46:58.460Z">
+<meta property="og:description" content="Timer使用经验在之前的工作中，因为需要爬虫能够定时执行，所以使用了Java本身提供的Timer类。为了避免遗忘，记录于此。
+Timer是Java本身所包含的工具类，其引用路径为java.util.Timer；在使用中，我们还需要引用一个类，java.util.TimerTask，用来为Timer指定工作任务。
+要定时执行某项任务其实非常简单，只需要创建一个TimerTask对象，设置好任务后，">
+<meta property="og:updated_time" content="2016-02-26T13:28:58.487Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="那些你应该知道的编程技巧">
-<meta name="twitter:description" content="当使用if/else方法时，你应该考虑一下是否能将其修改为三目运算符以提高代码的简洁性和可读性。
-
-12345if(a == b)    return true;return false;#可以修改为：return a == b ? true : false;
-
-当使用三目运算符时，你应该考虑其返回值是否可以简化为true和false从而直接根据第一个条件进行返回。
-
-123return a ==">
+<meta name="twitter:title" content="Java中的定时器：Timer">
+<meta name="twitter:description" content="Timer使用经验在之前的工作中，因为需要爬虫能够定时执行，所以使用了Java本身提供的Timer类。为了避免遗忘，记录于此。
+Timer是Java本身所包含的工具类，其引用路径为java.util.Timer；在使用中，我们还需要引用一个类，java.util.TimerTask，用来为Timer指定工作任务。
+要定时执行某项任务其实非常简单，只需要创建一个TimerTask对象，设置好任务后，">
   
     <link rel="alternative" href="/atom.xml" title="DarKnight" type="application/atom+xml">
   
@@ -233,11 +221,11 @@
         </header>                
     </div>
 </nav>
-      <div class="body-wrap"><article id="post-Skills-1" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-Java-1" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2016/02/Skills-1/" class="article-date">
-      <time datetime="2016-02-21T06:44:42.000Z" itemprop="datePublished">2016-02-21</time>
+      <a href="/2016/02/Java-1/" class="article-date">
+      <time datetime="2016-02-26T05:49:00.000Z" itemprop="datePublished">2016-02-26</time>
 </a>
     </div>
   
@@ -250,7 +238,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      那些你应该知道的编程技巧
+      Java中的定时器：Timer
     </h1>
   
 
@@ -261,7 +249,7 @@
 
         
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/代码编写技巧/">代码编写技巧</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Timer/">Timer</a></li></ul>
     </div>
 
         <div class="clearfix"></div>
@@ -271,20 +259,23 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <ul>
-<li>当使用if/else方法时，你应该考虑一下是否能将其修改为三目运算符以提高代码的简洁性和可读性。</li>
-</ul>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">if(a == b)</span><br><span class="line">    return true;</span><br><span class="line">return false;</span><br><span class="line">#可以修改为：</span><br><span class="line">return a == b ? true : false;</span><br></pre></td></tr></table></figure>
+        <h2 id="Timer使用经验"><a href="#Timer使用经验" class="headerlink" title="Timer使用经验"></a>Timer使用经验</h2><p>在之前的工作中，因为需要爬虫能够定时执行，所以使用了Java本身提供的Timer类。为了避免遗忘，记录于此。</p>
+<p>Timer是Java本身所包含的工具类，其引用路径为java.util.Timer；在使用中，我们还需要引用一个类，java.util.TimerTask，用来为Timer指定工作任务。</p>
+<p>要定时执行某项任务其实非常简单，只需要创建一个TimerTask对象，设置好任务后，将其传递给Timer的schedule方法即可。<br>schedule可以接收不同的参数，表示不同的定时方式：</p>
 <ul>
-<li>当使用三目运算符时，你应该考虑其返回值是否可以简化为true和false从而直接根据第一个条件进行返回。</li>
+<li>Timer.schedule(TimerTask task, Date time)    安排任务在指定的时间执行。</li>
+<li>Timer.schedule(TimerTask task, Date firstTime, Long period)    安排任务在指定的时间开始执行，并以指定时间为周期重复执行。</li>
+<li>Timer.schedule(TimerTask task, long delay)    安排任务在指定的延迟后执行。</li>
+<li>Timer.schedule(TimerTask task, long delay, long period)    安排任务在指定的延迟后开始执行，并以指定时间为周期重复执行。</li>
 </ul>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">return a == b ? true : false;</span><br><span class="line">#可以直接改为：</span><br><span class="line">return a == b;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>当赋值语句或者返回值涉及到是否为零的判断时，可以使用三目运算符，但还有一个比三目运算符更为简便的方式，便是利用逻辑操作符的短路特性：<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">0</span> &amp;&amp; N <span class="comment">//返回：0</span></span><br><span class="line">N &amp;&amp; M <span class="comment">//返回：M</span></span><br><span class="line">N &amp;&amp; <span class="number">0</span> <span class="comment">//返回：0</span></span><br><span class="line"><span class="number">0</span> || N <span class="comment">//返回：N</span></span><br><span class="line">N || <span class="number">0</span> <span class="comment">//返回：N</span></span><br><span class="line">M || N <span class="comment">//返回：M</span></span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//本例子是大数计算，求s1^s2的最后一位尾数</span></span><br><span class="line"><span class="keyword">var</span> lastDigit = <span class="function"><span class="keyword">function</span>(<span class="params">s1, s2</span>) </span>&#123;  </span><br><span class="line">  <span class="keyword">return</span> +(s2 === <span class="string">'0'</span>) ||</span><br><span class="line">         <span class="built_in">Math</span>.pow(s1.slice(-<span class="number">1</span>), s2.slice(-<span class="number">2</span>) % <span class="number">4</span> || <span class="number">4</span>) % <span class="number">10</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<a id="more"></a>
+<p>例如：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">TimerTask task = <span class="keyword">new</span> TimerTask() &#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="comment">// TODO ：要执行的任务</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line">Timer timer = <span class="keyword">new</span> Timer();</span><br><span class="line">timer.schedule(task, firstTime, period);</span><br></pre></td></tr></table></figure></p>
+<p>上面的代码中，firstTime表示第一次开始执行的时间，period表示两次执行之间的间隔时间（以毫秒为单位）。</p>
+<p>其实并没有什么难度。在这里记录一下使用过程中发现的一个问题：</p>
+<p>如果安排任务在指定时间开始执行，而当前系统时间是在指定时间之后的，那么任务会立刻开始执行。<br>所以如果需要对启动时间进行设置，使其每次都在指定时间开始执行，那么我们还需要对设置的时间进行判断。</p>
+<p>下面是我在项目中使用的代码，使用的Web框架为JFinal，这里贴出主要部分的代码。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">final</span> Long[] processIds = getParaValuesToLong(<span class="string">"id"</span>);</span><br><span class="line"><span class="keyword">final</span> Boolean daemon = getParaToBoolean(<span class="string">"daemon"</span>, <span class="keyword">true</span>);</span><br><span class="line"><span class="keyword">final</span> String params = getPara(<span class="string">"params"</span>, <span class="string">"&#123;&#125;"</span>);</span><br><span class="line"></span><br><span class="line">String runTime = getPara(<span class="string">"runtime"</span>, <span class="string">"02:00:00"</span>);	<span class="comment">// 如果没有主动设置启动时间，则默认为凌晨两点。设置格式为hh:mm:ss</span></span><br><span class="line">SimpleDateFormat sdf = <span class="keyword">new</span> SimpleDateFormat(<span class="string">"HH:mm:ss"</span>);</span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">	runTime = sdf.format(sdf.parse(runTime));</span><br><span class="line">&#125; <span class="keyword">catch</span> (ParseException e) &#123;</span><br><span class="line">	<span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(e);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> hour = Integer.parseInt(runTime.substring(<span class="number">0</span>, <span class="number">2</span>));</span><br><span class="line"><span class="keyword">int</span> minute = Integer.parseInt(runTime.substring(<span class="number">3</span>, <span class="number">5</span>));</span><br><span class="line"><span class="keyword">int</span> second = Integer.parseInt(runTime.substring(<span class="number">6</span>, <span class="number">8</span>));</span><br><span class="line"></span><br><span class="line"><span class="comment">// 对设置的时间进行判断。如果已经超过了今天的该时间，则将启动日期+1</span></span><br><span class="line">Calendar c = Calendar.getInstance();</span><br><span class="line">c.set(c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.DATE), hour, minute, second);</span><br><span class="line"><span class="keyword">if</span> (c.getTime().before(<span class="keyword">new</span> Date()))&#123;</span><br><span class="line">	c.set(c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.DATE) + <span class="number">1</span>, hour, minute, second);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">final</span> Long id : processIds) &#123;</span><br><span class="line">	<span class="keyword">if</span> (notBlank(id)) &#123;</span><br><span class="line">		Workflow instance = snakerService.getProcess(id);	<span class="comment">//获取流程实例</span></span><br><span class="line">		<span class="keyword">if</span> (instance != <span class="keyword">null</span>) &#123;		<span class="comment">//流程实例不为空才允许定时设置</span></span><br><span class="line">			Map&lt;String, Object&gt; m = <span class="keyword">new</span> HashMap&lt;String, Object&gt;();</span><br><span class="line">			m.put(<span class="string">"id"</span>, instance.getProcessId());</span><br><span class="line">			m.put(<span class="string">"name"</span>, instance.getProcessName());</span><br><span class="line">			m.put(<span class="string">"scheduler"</span>, runTime);</span><br><span class="line">			timerDataList.add(m);		<span class="comment">//将定时任务的状态加入列表，方便在页面上查看</span></span><br><span class="line"></span><br><span class="line">			TimerTask task = <span class="keyword">new</span> TimerTask() &#123;</span><br><span class="line">				<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">					snakerService.startProcess(id, params, daemon);	<span class="comment">//定时任务内容：启动流程</span></span><br><span class="line">				&#125;</span><br><span class="line">			&#125;;</span><br><span class="line"></span><br><span class="line">			Timer timer = <span class="keyword">new</span> Timer();</span><br><span class="line">			timer.schedule(task, c.getTime(), <span class="number">24</span> * <span class="number">3600</span> * <span class="number">1000</span>);	<span class="comment">//添加定时任务。一天启动一次</span></span><br><span class="line">			timerDataMap.put(id, timer);	<span class="comment">//将定时任务的id及定时器保存在Map中，方便在需要时将其停止</span></span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">renderJson(timerDataList);		<span class="comment">//将定时任务状态列表渲染到页面上</span></span><br></pre></td></tr></table></figure></p>
+<p>定时任务一旦启动，当然需要有方法将其停止。要停止一个定时任务，只需要调用其cancel()方法即可。<br>下面是我的项目中的停止代码：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Long processId = getParaToLong();		<span class="comment">//传递要停止的流程ID</span></span><br><span class="line">timerDataMap.get(processId).cancel();	<span class="comment">//根据ID从全局Map中拿到定时对象，调用cancel方法将其停止</span></span><br><span class="line">timerDataMap.remove(processId);			<span class="comment">//将该流程从Map中删除</span></span><br><span class="line"><span class="keyword">for</span> (Map&lt;String, Object&gt; tmp : timerDataList) &#123;	<span class="comment">//将该流程从任务状态列表中删除，以保证页面上定时任务的正确显示</span></span><br><span class="line">	<span class="keyword">if</span> (tmp.get(<span class="string">"id"</span>) == processId) &#123;</span><br><span class="line">		timerDataList.remove(tmp);</span><br><span class="line">		<span class="keyword">break</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">renderJson(timerDataList);</span><br></pre></td></tr></table></figure></p>
+<h2 id="完"><a href="#完" class="headerlink" title="完"></a>完</h2>
       
     </div>
     
@@ -292,13 +283,13 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2016/02/Skills-1/">那些你应该知道的编程技巧</a></p>
+        <p><span>本文标题:</span><a href="/2016/02/Java-1/">Java中的定时器：Timer</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 Lancelot 的个人博客">Lancelot</a></p>
-        <p><span>发布时间:</span>2016年02月21日 - 14时44分</p>
-        <p><span>最后更新:</span>2016年02月21日 - 14时46分</p>
+        <p><span>发布时间:</span>2016年02月26日 - 13时49分</p>
+        <p><span>最后更新:</span>2016年02月26日 - 21时28分</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2016/02/Skills-1/" title="那些你应该知道的编程技巧">http://darknight.me/2016/02/Skills-1/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://darknight.me/2016/02/Skills-1/　　作者: Lancelot" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2016/02/Java-1/" title="Java中的定时器：Timer">http://darknight.me/2016/02/Java-1/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://darknight.me/2016/02/Java-1/　　作者: Lancelot" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script src="/js/clipboard.min.js"></script>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
@@ -311,16 +302,10 @@
 
     <nav id="article-nav">
         
-            <div id="article-nav-newer" class="article-nav-title">
-                <a href="/2016/02/JavaScript-1/">
-                    JavaScript中的那些方法：函数
-                </a>
-            </div>
-        
         
             <div id="article-nav-older" class="article-nav-title">
-                <a href="/2015/09/Spring-1/">
-                    Spring服务器设置文件上传限制
+                <a href="/2016/02/JavaScript-4/">
+                    JavaScript中的那些方法：字符串
                 </a>
             </div>
         
@@ -331,7 +316,7 @@
 
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
-    
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Timer使用经验"><span class="toc-number">1.</span> <span class="toc-text">Timer使用经验</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#完"><span class="toc-number">2.</span> <span class="toc-text">完</span></a></li></ol>
 </div>
 <style>
     .left-col .switch-btn {
@@ -395,7 +380,7 @@
     
       <div class="duoshuo" id="comments">
     <!-- 多说评论框 start -->
-    <div class="ds-thread" data-thread-key="2016/02/Skills-1/" data-title="那些你应该知道的编程技巧" data-url="http://darknight.me/2016/02/Skills-1/"></div>
+    <div class="ds-thread" data-thread-key="2016/02/Java-1/" data-title="Java中的定时器：Timer" data-url="http://darknight.me/2016/02/Java-1/"></div>
     <!-- 多说评论框 end -->
     <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
     <script type="text/javascript">
@@ -419,15 +404,13 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2016/02/JavaScript-1/" title="上一篇: JavaScript中的那些方法：函数">
-                <i class="fa fa-angle-left"></i>
-            </a>
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
         
 
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/2015/09/Spring-1/" title="下一篇: Spring服务器设置文件上传限制">
+            <a href="/2016/02/JavaScript-4/" title="下一篇: JavaScript中的那些方法：字符串">
                 <i class="fa fa-angle-right"></i>
             </a>
         
