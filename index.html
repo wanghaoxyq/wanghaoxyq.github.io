@@ -141,7 +141,7 @@
                 
                 <section class="switch-part switch-part2">
                     <div class="widget tagcloud" id="js-tagcloud">
-                        <a href="/tags/Java/" style="font-size: 11.67px;">Java</a> <a href="/tags/JavaScript/" style="font-size: 15px;">JavaScript</a> <a href="/tags/Python/" style="font-size: 16.67px;">Python</a> <a href="/tags/Python学习笔记/" style="font-size: 18.33px;">Python学习笔记</a> <a href="/tags/Spring/" style="font-size: 10px;">Spring</a> <a href="/tags/Timer/" style="font-size: 10px;">Timer</a> <a href="/tags/fishc-com/" style="font-size: 20px;">fishc.com</a> <a href="/tags/代码编写技巧/" style="font-size: 10px;">代码编写技巧</a> <a href="/tags/正则表达式/" style="font-size: 13.33px;">正则表达式</a>
+                        <a href="/tags/HttpClient/" style="font-size: 10px;">HttpClient</a> <a href="/tags/Java/" style="font-size: 12px;">Java</a> <a href="/tags/JavaScript/" style="font-size: 14px;">JavaScript</a> <a href="/tags/Javascript/" style="font-size: 10px;">Javascript</a> <a href="/tags/POST/" style="font-size: 10px;">POST</a> <a href="/tags/Python/" style="font-size: 16px;">Python</a> <a href="/tags/Python学习笔记/" style="font-size: 18px;">Python学习笔记</a> <a href="/tags/Spring/" style="font-size: 10px;">Spring</a> <a href="/tags/Timer/" style="font-size: 10px;">Timer</a> <a href="/tags/Web/" style="font-size: 10px;">Web</a> <a href="/tags/fishc-com/" style="font-size: 20px;">fishc.com</a> <a href="/tags/代码编写技巧/" style="font-size: 10px;">代码编写技巧</a> <a href="/tags/正则表达式/" style="font-size: 12px;">正则表达式</a> <a href="/tags/爬虫/" style="font-size: 10px;">爬虫</a>
                     </div>
                 </section>
                 
@@ -218,6 +218,134 @@
     </div>
 </nav>
       <div class="body-wrap">
+  
+    <article id="post-Java-2" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/03/Java-2/" class="article-date">
+      <time datetime="2016-03-01T05:21:00.000Z" itemprop="datePublished">2016-03-01</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/03/Java-2/">HttpClient模拟登录</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+              <h2 id="模拟登录"><a href="#模拟登录" class="headerlink" title="模拟登录"></a>模拟登录</h2><h3 id="分析需要模拟的页面"><a href="#分析需要模拟的页面" class="headerlink" title="分析需要模拟的页面"></a>分析需要模拟的页面</h3><p>有些时候，爬虫需要抓取的页面需要登录之后才能访问。要使程序模拟出登录的效果，我们需要的是实际登录之后所返回的Cookies。</p>
+<p>要使用程序完成模拟登录的过程，需要先对实际登录的流程有所了解，这里就需要对目标网站进行分析。<br>网页登录实际上就是将账号密码（这里暂不考虑验证码）填入表单，然后点击登录按钮以POST方式提交表单。模拟登录也是模拟该过程。</p>
+<p>这里使用的是Chrome浏览器自带的开发者工具。<br>进入目标网站的登录页面，按F12打开开发者工具，进入Network选项卡，Clear之前的记录，然后返回登录页面，输入账号密码，点击登录，然后返回开发者工具查看Network中的记录。<br>找到传递参数的那个页面，点开之后可以看到参数是以指定的参数名传递到后台的。例如：前程无忧的用户名和密码是以username和userpwd的参数名传递的。</p>
+<p>找到这里就可以开始动手写代码了，目标就是使用HttpClient模拟表单的提交。</p>
+          
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/HttpClient/">HttpClient</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/爬虫/">爬虫</a></li></ul>
+    </div>
+
+      
+        <p class="article-more-link">
+          <a  href="/2016/03/Java-2/#more">阅读全文 >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-Web-1" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/02/Web-1/" class="article-date">
+      <time datetime="2016-02-29T05:54:00.000Z" itemprop="datePublished">2016-02-29</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/02/Web-1/">使用window.open()方法传递post参数</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>今天碰到一个需求，需要从前端传递一个长度非常长的变量到后台，生成一个Excel文件，并下载到本地。</p>
+<p>由于变量长度超过URL的限制，所以调用window.open()并在传递的URL中使用GET方式传参的方法并不可行。</p>
+<p>而使用Ajax方式，生成的文件会直接保存在服务器，而不是下载到本地。</p>
+<p>最终使用了模拟表单的方式完成，具体代码如下：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> obj = <span class="built_in">window</span>.open(<span class="string">"about:blank"</span>);		<span class="comment">//打开一个空的新窗口</span></span><br><span class="line"><span class="keyword">var</span> url = myTargetUrl;						<span class="comment">//后台接口的URL</span></span><br><span class="line"><span class="keyword">var</span> postDataHtml = <span class="string">"&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;&lt;form id='postDataForm' method='post' action='"</span> + url + <span class="string">"'&gt;"</span></span><br><span class="line"> + <span class="string">"&lt;input type='hidden' name='content' value='"</span> + content + <span class="string">"'/&gt;"</span></span><br><span class="line"> + <span class="string">"&lt;/form&gt;&lt;script type=\"text/javascript\"&gt; document.getElementById(\"postDataForm\").submit();&lt;/script&gt;&lt;/body&gt;&lt;/html&gt;"</span>;</span><br><span class="line">obj.document.write(postDataHtml);</span><br></pre></td></tr></table></figure></p>
+<p>上述代码在打开的窗口中隐藏了一个表单，并在加载完成时调用submit()方法完成提交。</p>
+<p>这里只传递了一个参数，如果有多个参数需要传递，只需要添加相应的<code>&lt;input /&gt;</code>标签即可。</p>
+<h2 id="完"><a href="#完" class="headerlink" title="完"></a>完</h2>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Javascript/">Javascript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/POST/">POST</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Web/">Web</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
   
     <article id="post-Java-1" class="article article-type-post" itemscope itemprop="blogPost">
   
@@ -738,137 +866,6 @@
       
         <p class="article-more-link">
           <a  href="/2015/09/PythonStudy-42/#more">阅读全文 >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-PythonStudy-41" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/08/PythonStudy-41/" class="article-date">
-      <time datetime="2015-08-13T16:00:01.000Z" itemprop="datePublished">2015-08-14</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/08/PythonStudy-41/">Python学习（41）：爬虫：异常处理</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-              <h3 id="1-URLError"><a href="#1-URLError" class="headerlink" title="1. URLError"></a>1. URLError</h3><ul>
-<li>例子：<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> urllib.request</span><br><span class="line"><span class="keyword">import</span> urllib.error</span><br><span class="line">req = urllib.request.Request(<span class="string">'http://www.hahahahaahsdfsdl.com'</span>)</span><br><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    urllib.request.urlopen(req)</span><br><span class="line"><span class="keyword">except</span> urllib.error.URLError <span class="keyword">as</span> e:</span><br><span class="line">    print(e.reason)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 打印：[Errno 11001] getaddrinfo failed</span></span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-          
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python学习笔记/">Python学习笔记</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/fishc-com/">fishc.com</a></li></ul>
-    </div>
-
-      
-        <p class="article-more-link">
-          <a  href="/2015/08/PythonStudy-41/#more">阅读全文 >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-PythonStudy-40" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/08/PythonStudy-40/" class="article-date">
-      <time datetime="2015-08-13T16:00:00.000Z" itemprop="datePublished">2015-08-14</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/08/PythonStudy-40/">Python学习（40）：正则表达式2</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-              <h3 id="1-一些常用方法"><a href="#1-一些常用方法" class="headerlink" title="1. 一些常用方法"></a>1. 一些常用方法</h3><ul>
-<li><strong>re.compile()</strong><br>该方法将正则表达式编译为模式对象<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> re</span><br><span class="line">p = re.compile(<span class="string">'ab*'</span>)</span><br><span class="line">p  </span><br><span class="line"><span class="comment">#返回：&lt;_sre.SRE_Pattern object at 0x...&gt;</span></span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>该方法也可以接收flags参数，用于开启各种特殊功能和语法变化，例如：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">p = re.compile(<span class="string">'ab*'</span>, re.IGNORECASE)</span><br></pre></td></tr></table></figure></p>
-          
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python学习笔记/">Python学习笔记</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/fishc-com/">fishc.com</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/正则表达式/">正则表达式</a></li></ul>
-    </div>
-
-      
-        <p class="article-more-link">
-          <a  href="/2015/08/PythonStudy-40/#more">阅读全文 >></a>
         </p>
       
       <div class="clearfix"></div>

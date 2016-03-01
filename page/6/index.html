@@ -141,7 +141,7 @@
                 
                 <section class="switch-part switch-part2">
                     <div class="widget tagcloud" id="js-tagcloud">
-                        <a href="/tags/Java/" style="font-size: 11.67px;">Java</a> <a href="/tags/JavaScript/" style="font-size: 15px;">JavaScript</a> <a href="/tags/Python/" style="font-size: 16.67px;">Python</a> <a href="/tags/Python学习笔记/" style="font-size: 18.33px;">Python学习笔记</a> <a href="/tags/Spring/" style="font-size: 10px;">Spring</a> <a href="/tags/Timer/" style="font-size: 10px;">Timer</a> <a href="/tags/fishc-com/" style="font-size: 20px;">fishc.com</a> <a href="/tags/代码编写技巧/" style="font-size: 10px;">代码编写技巧</a> <a href="/tags/正则表达式/" style="font-size: 13.33px;">正则表达式</a>
+                        <a href="/tags/HttpClient/" style="font-size: 10px;">HttpClient</a> <a href="/tags/Java/" style="font-size: 12px;">Java</a> <a href="/tags/JavaScript/" style="font-size: 14px;">JavaScript</a> <a href="/tags/Javascript/" style="font-size: 10px;">Javascript</a> <a href="/tags/POST/" style="font-size: 10px;">POST</a> <a href="/tags/Python/" style="font-size: 16px;">Python</a> <a href="/tags/Python学习笔记/" style="font-size: 18px;">Python学习笔记</a> <a href="/tags/Spring/" style="font-size: 10px;">Spring</a> <a href="/tags/Timer/" style="font-size: 10px;">Timer</a> <a href="/tags/Web/" style="font-size: 10px;">Web</a> <a href="/tags/fishc-com/" style="font-size: 20px;">fishc.com</a> <a href="/tags/代码编写技巧/" style="font-size: 10px;">代码编写技巧</a> <a href="/tags/正则表达式/" style="font-size: 12px;">正则表达式</a> <a href="/tags/爬虫/" style="font-size: 10px;">爬虫</a>
                     </div>
                 </section>
                 
@@ -218,6 +218,138 @@
     </div>
 </nav>
       <div class="body-wrap">
+  
+    <article id="post-PythonStudy-10" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/06/PythonStudy-10/" class="article-date">
+      <time datetime="2015-06-18T16:00:00.000Z" itemprop="datePublished">2015-06-19</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/06/PythonStudy-10/">Python学习（10）：内嵌函数和闭包</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+              <h3 id="1-global关键字"><a href="#1-global关键字" class="headerlink" title="1. global关键字"></a>1. global关键字</h3><ul>
+<li>从上一节作用域的内容中可以发现，在函数内部修改全局变量的值会生成一个名字相同的局部变量，它和全局变量之间没有关系。那么如果真的想要在函数内部修改全局变量的值时应该怎么办呢？请看例子：<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">count = <span class="number">5</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">Func</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">global</span> count</span><br><span class="line">    count = <span class="number">10</span></span><br><span class="line">    print(count)</span><br><span class="line"><span class="comment">#------分隔线-------#</span></span><br><span class="line">Func()</span><br><span class="line"><span class="comment">#返回：10</span></span><br><span class="line">count</span><br><span class="line"><span class="comment">#返回：10</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>可以看到在函数内部使用了global关键字声明count为全局变量后，在内部对count进行赋值就是直接对全局变量进行赋值了</p>
+          
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python学习笔记/">Python学习笔记</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/fishc-com/">fishc.com</a></li></ul>
+    </div>
+
+      
+        <p class="article-more-link">
+          <a  href="/2015/06/PythonStudy-10/#more">阅读全文 >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-PythonStudy-9" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/06/PythonStudy-9/" class="article-date">
+      <time datetime="2015-06-17T16:00:00.000Z" itemprop="datePublished">2015-06-18</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/06/PythonStudy-9/">Python学习（9）：函数作用域</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+              <h3 id="1-函数与过程"><a href="#1-函数与过程" class="headerlink" title="1. 函数与过程"></a>1. 函数与过程</h3><ul>
+<li>函数是有返回值的，而过程是（procedure）是简单、特殊并且没有返回值的</li>
+<li>Python严格来说只有函数，没有过程<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">hello</span><span class="params">()</span>:</span></span><br><span class="line">    print(<span class="string">'Hello World!'</span>)</span><br><span class="line"><span class="comment">#定义了一个函数hello()</span></span><br><span class="line">temp = hello()</span><br><span class="line"><span class="comment">#返回：Hello World!</span></span><br><span class="line">temp</span><br><span class="line"><span class="comment">#返回为空</span></span><br><span class="line">print(temp)</span><br><span class="line"><span class="comment">#返回：None</span></span><br><span class="line">type(temp)</span><br><span class="line"><span class="comment">#返回：&lt;class 'NoneType'&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+          
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python学习笔记/">Python学习笔记</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/fishc-com/">fishc.com</a></li></ul>
+    </div>
+
+      
+        <p class="article-more-link">
+          <a  href="/2015/06/PythonStudy-9/#more">阅读全文 >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
   
     <article id="post-PythonStudy-8" class="article article-type-post" itemscope itemprop="blogPost">
   
